@@ -265,9 +265,10 @@ figcaption{font-family:'Barlow',sans-serif;font-size:12.5px;color:var(--muted);m
 .offer-card{background:var(--panel);border-radius:22px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--panel-line)}
 .offer-flag{background:var(--orange);color:#1c1200;text-align:center;font-family:'Barlow Condensed',sans-serif;
   font-weight:700;font-size:clamp(16px,2.4vw,21px);letter-spacing:.05em;padding:10px;text-transform:uppercase}
-.offer-in{display:grid;grid-template-columns:300px 1fr;gap:clamp(20px,4vw,40px);padding:clamp(22px,4vw,36px);align-items:center}
-.offer-in .shot{background:radial-gradient(circle at 50% 40%,#2c251d,#141210);border-radius:16px;padding:14px}
-.offer-in .shot img{border-radius:10px;width:100%;object-fit:cover;object-position:center 42%;aspect-ratio:3/4}
+.offer-in{display:grid;grid-template-columns:minmax(0,44%) 1fr;gap:clamp(22px,4vw,44px);padding:clamp(22px,4vw,36px);align-items:stretch}
+.offer-in .shot{border-radius:16px;overflow:hidden;background:radial-gradient(circle at 50% 40%,#2c251d,#141210);align-self:stretch;min-height:100%}
+.offer-in .shot img{width:100%;height:100%;object-fit:cover;object-position:center 44%;display:block}
+.offer-in .content{display:flex;flex-direction:column;justify-content:center}
 .offer .name{font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#fff;font-size:clamp(28px,4vw,38px);line-height:.95}
 .offer .name .o{color:var(--orange)}
 .offer .sub2{font-family:'Barlow',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin:4px 0 14px}
@@ -683,7 +684,7 @@ figcaption{font-family:'Barlow',sans-serif;font-size:12.5px;color:var(--muted);m
     <div class="offer-flag">&#128293; Buy 2 Get 1 Free &middot; Today Only</div>
     <div class="offer-in">
       <div class="shot"><img src="assets/bottle.jpg" alt="Primal Storm bottle, 90 capsules"></div>
-      <div>
+      <div class="content">
         <div class="name">PRIMAL <span class="o">STORM</span></div>
         <div class="sub2">Masculinity Pro Complex &middot; 90 Capsules</div>
         <ul>
