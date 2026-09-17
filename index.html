@@ -10,718 +10,798 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f5f2ec; --surface:#ffffff; --ink:#17130d; --body:#2c2620; --muted:#6f665b;
-  --line:#e6ded1; --line-soft:#efe8dc;
-  --brand:#f18e23; --brand-ink:#b45c00; --brand-soft:#fbe9d3;
-  --danger:#c62828; --danger-soft:#fbe4e2; --good:#1f9d55; --good-soft:#e2f5ea;
+  color-scheme:light;
+  --paper:#f6f3ec; --surface:#ffffff; --ink:#16130e; --body:#3a342c; --muted:#6f665b;
+  --line:#e5ded1; --line-soft:#efe9dd;
+  --orange:#f18e23; --orange-ink:#b45c00; --orange-deep:#c2410c; --orange-soft:#fbe9d3;
+  --danger:#d7433b; --danger-soft:#fce4e2; --good:#1f9d55; --good-soft:#e3f5ea;
   --teal:#0f7d6b; --gold:#d99a1c;
-  --panel:#141210; --panel-2:#211c16; --panel-3:#2c251d;
-  --panel-ink:#f4ece0; --panel-muted:#b7ab9a; --panel-line:#3a3227;
-  --shadow:0 1px 2px rgba(20,15,8,.05),0 12px 34px -14px rgba(20,15,8,.22);
-  --shadow-sm:0 1px 2px rgba(20,15,8,.06),0 6px 16px -10px rgba(20,15,8,.20);
-  --maxw:720px;
-}
-:root:not([data-theme="light"]){
-  @media (prefers-color-scheme:dark){
-    --bg:#161310; --surface:#1e1a14; --ink:#f7f0e4; --body:#ddd3c5; --muted:#a99d8d;
-    --line:#332c22; --line-soft:#2a241c;
-    --brand:#f5a53d; --brand-ink:#f6ac48; --brand-soft:#3a2a15;
-    --danger:#f0625f; --danger-soft:#3a201f; --good:#3ec37e; --good-soft:#173026;
-    --teal:#22a892; --gold:#ecc158;
-    --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 40px -16px rgba(0,0,0,.7);
-    --shadow-sm:0 1px 2px rgba(0,0,0,.4),0 8px 20px -12px rgba(0,0,0,.6);
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#161310; --surface:#1e1a14; --ink:#f7f0e4; --body:#ddd3c5; --muted:#a99d8d;
-  --line:#332c22; --line-soft:#2a241c;
-  --brand:#f5a53d; --brand-ink:#f6ac48; --brand-soft:#3a2a15;
-  --danger:#f0625f; --danger-soft:#3a201f; --good:#3ec37e; --good-soft:#173026;
-  --teal:#22a892; --gold:#ecc158;
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 40px -16px rgba(0,0,0,.7);
-  --shadow-sm:0 1px 2px rgba(0,0,0,.4),0 8px 20px -12px rgba(0,0,0,.6);
+  --panel:#141210; --panel-2:#211c16; --panel-3:#2c251d; --panel-ink:#f4ece0;
+  --panel-muted:#b7ab9a; --panel-line:#3a3227;
+  --cell:#4fd08c;
+  --shadow:0 1px 2px rgba(20,15,8,.05),0 22px 50px -20px rgba(20,15,8,.28);
+  --shadow-sm:0 1px 2px rgba(20,15,8,.06),0 8px 20px -12px rgba(20,15,8,.22);
+  --maxw:1120px;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--body);
-  font-family:'Lora',Georgia,'Times New Roman',serif;font-size:18px;line-height:1.68;
-  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;padding-bottom:76px}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--body);
+  font-family:'Lora',Georgia,serif;font-size:18px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 img{max-width:100%;display:block}
-a{color:var(--brand-ink)}
-.cond{font-family:'Barlow Condensed','Barlow',system-ui,sans-serif}
+a{color:var(--orange-ink)}
+.cond{font-family:'Barlow Condensed','Barlow',sans-serif}
 .sans{font-family:'Barlow',system-ui,sans-serif}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(16px,4vw,32px)}
+h1,h2,h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;color:var(--ink);
+  letter-spacing:-.01em;text-wrap:balance;margin:0}
+.eyebrow{font-family:'Barlow',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--orange-ink)}
 
-/* ---------- top announcement + masthead ---------- */
-.promo{background:var(--panel);color:#fff;text-align:center;
-  font-family:'Barlow',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;
-  padding:9px 16px;text-transform:uppercase}
-.promo b{color:var(--brand)}
-.promo .sep{opacity:.4;margin:0 8px}
-.mast{background:var(--surface);border-bottom:1px solid var(--line);position:relative}
-.mast-in{max-width:var(--maxw);margin:0 auto;padding:14px 20px;
-  display:flex;align-items:center;justify-content:space-between;gap:12px}
-.mast-brand{display:flex;align-items:baseline;gap:9px;text-decoration:none}
-.mast-brand .hi{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:25px;
-  letter-spacing:.02em;color:var(--ink);line-height:1;text-transform:uppercase}
-.mast-brand .hi em{color:var(--brand-ink);font-style:normal}
-.mast-brand .tag{font-family:'Barlow',sans-serif;font-size:9.5px;letter-spacing:.24em;
-  color:var(--muted);text-transform:uppercase}
-.mast-nav{display:flex;gap:18px;font-family:'Barlow',sans-serif;font-size:12px;
-  letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.mast-nav span:first-child{color:var(--brand-ink);font-weight:600}
-@media(max-width:560px){.mast-nav{display:none}}
+/* ---------- top bar + progress ---------- */
+.top{position:sticky;top:0;z-index:40;background:rgba(246,243,236,.92);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topin{max-width:var(--maxw);margin:0 auto;height:56px;display:flex;align-items:center;
+  justify-content:space-between;gap:14px;padding:0 clamp(16px,4vw,32px)}
+.brand{display:flex;align-items:baseline;gap:9px;text-decoration:none}
+.brand .hi{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;
+  color:var(--ink);text-transform:uppercase;line-height:1}
+.brand .hi em{color:var(--orange-ink);font-style:normal}
+.brand .tag{font-family:'Barlow',sans-serif;font-size:9px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase}
+.topmeta{font-family:'Barlow',sans-serif;font-size:11px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+@media(max-width:600px){.topmeta{display:none}}
+.progress{position:absolute;left:0;bottom:-1px;height:3px;width:0;background:var(--orange)}
 
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
-.article{background:var(--surface);max-width:calc(var(--maxw) + 0px);margin:0 auto;
-  border-left:1px solid var(--line);border-right:1px solid var(--line)}
-.pad{padding:0 clamp(18px,5vw,40px)}
+/* ---------- hero ---------- */
+.hero{background:var(--panel);color:#fff;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 82% 14%,rgba(241,142,35,.38),transparent 40%)}
+.hero-in{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,54px);
+  align-items:center;padding:clamp(40px,6vw,70px) 0}
+.hero .eyebrow{color:var(--orange)}
+.hero .meta{display:flex;flex-wrap:wrap;gap:6px 18px;color:#c9c1b4;font-family:'Barlow',sans-serif;
+  font-size:12px;margin:14px 0 18px}
+.hero .meta b{color:#fff;font-weight:600}
+.hero h1{color:#fff;font-size:clamp(36px,6.4vw,68px);line-height:.98;margin-bottom:16px}
+.hero h1 .hl{color:var(--orange)}
+.hero .lead{font-size:clamp(17px,2.2vw,20px);color:#ddd5c8;max-width:46ch;margin:0 0 24px;line-height:1.55}
+.hero .lead b{color:#fff}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.hero-foot{display:flex;flex-wrap:wrap;gap:8px 22px;border-top:1px solid #34302a;margin-top:26px;
+  padding-top:16px;font-family:'Barlow',sans-serif;font-size:12px;color:#c9c1b4;letter-spacing:.04em}
+.hero-foot .star{color:var(--gold)}
+.hero-art{position:relative;border:1px solid #3a352d;background:#1b1712;padding:12px;
+  box-shadow:0 30px 70px rgba(0,0,0,.5);transform:rotate(1.5deg);border-radius:6px}
+.hero-art img{border-radius:3px;aspect-ratio:1/1;object-fit:cover}
+.hero-art .badge{position:absolute;bottom:-14px;left:16px;background:var(--orange);color:#1c1200;
+  font-family:'Barlow',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;
+  padding:7px 11px;border-radius:4px;text-transform:uppercase;transform:rotate(-1.5deg)}
+@media(max-width:820px){.hero-in{grid-template-columns:1fr;padding:36px 0 40px}
+  .hero-art{max-width:460px;margin:8px auto 0;transform:none}}
 
-/* ---------- kicker + headline + byline ---------- */
-.kicker{display:inline-flex;align-items:center;gap:8px;margin-top:30px;
-  font-family:'Barlow',sans-serif;font-weight:700;font-size:12px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--danger)}
-.kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--danger);
-  animation:blink 1.6s steps(1) infinite}
-@keyframes blink{50%{opacity:.25}}
-h1{font-family:'Barlow Condensed',sans-serif;font-weight:700;color:var(--ink);
-  font-size:clamp(33px,7.4vw,52px);line-height:1.02;letter-spacing:-.01em;
-  margin:.34em 0 .28em;text-wrap:balance}
-h1 .hl{color:var(--brand-ink)}
-.dek{font-size:clamp(18px,2.4vw,21px);color:var(--body);margin:0 0 22px;
-  line-height:1.55;max-width:38ch}
-.dek b{color:var(--ink)}
-.byline{display:flex;align-items:center;gap:12px;padding:16px 0;
-  border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
-.byline .ava{width:44px;height:44px;border-radius:50%;flex:0 0 auto;
-  background:linear-gradient(135deg,#2c251d,#5a4a36);display:grid;place-items:center;
-  color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px}
-.byline .who{font-family:'Barlow',sans-serif;font-size:13.5px;line-height:1.45;color:var(--muted)}
-.byline .who b{color:var(--ink);font-size:14.5px;font-weight:600}
-.byline .who .verify{color:var(--good);font-weight:600}
-.stars-i{color:var(--gold);letter-spacing:1px}
-
-/* ---------- body text ---------- */
-.article p{margin:0 0 18px}
-.lede{font-size:20.5px;line-height:1.6}
-.lede::first-letter{float:left;font-family:'Barlow Condensed',sans-serif;font-weight:700;
-  font-size:66px;line-height:.72;padding:6px 10px 0 0;color:var(--brand-ink)}
-.pullquote{font-size:22px;line-height:1.5;color:var(--ink);font-style:italic;
-  border-left:4px solid var(--brand);padding:6px 0 6px 20px;margin:26px 0}
-
-/* ---------- reason blocks ---------- */
-.reason{padding-top:34px;margin-top:34px;border-top:1px solid var(--line)}
-.reason:first-of-type{border-top:none}
-.rnum{display:flex;align-items:center;gap:12px;margin-bottom:6px}
-.rnum .n{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:44px;
-  line-height:.8;color:var(--brand);-webkit-text-stroke:0}
-.rnum .lab{font-family:'Barlow',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--muted)}
-.rnum .bar{flex:1;height:2px;background:linear-gradient(90deg,var(--brand),transparent)}
-h2{font-family:'Barlow Condensed',sans-serif;font-weight:700;color:var(--ink);
-  font-size:clamp(25px,4.4vw,33px);line-height:1.04;letter-spacing:-.005em;margin:0 0 14px;text-wrap:balance}
-
-/* ---------- figures / compound graphics ---------- */
-figure{margin:24px 0;background:var(--panel);border-radius:16px;overflow:hidden;
-  box-shadow:var(--shadow);border:1px solid var(--panel-line)}
-figure.light{background:linear-gradient(180deg,#fff,#fbf7f0);border:1px solid var(--line)}
-:root[data-theme="dark"] figure.light,
-:root:not([data-theme="light"]) figure.light{background:linear-gradient(180deg,#211c16,#1a1610);border-color:var(--panel-line)}
-.fig-pad{padding:20px clamp(16px,4vw,26px)}
-figcaption{font-family:'Barlow',sans-serif;font-size:12.5px;color:var(--panel-muted);
-  padding:0 clamp(16px,4vw,26px) 16px;line-height:1.4}
-figure.light figcaption{color:var(--muted)}
-.fig-eyebrow{font-family:'Barlow',sans-serif;font-weight:700;font-size:11px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--brand);margin:0 0 14px;display:flex;align-items:center;gap:8px}
-.fig-eyebrow .ico{width:16px;height:16px}
-svg{display:block;width:100%;height:auto}
-.on-panel{color:var(--panel-ink)}
-
-/* comparison two-col */
-.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch}
-.vs .col{padding:6px 4px}
-.vs .vsbadge{align-self:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;
-  font-size:15px;color:var(--panel-muted);background:var(--panel-2);border:1px solid var(--panel-line);
-  border-radius:50%;width:38px;height:38px;display:grid;place-items:center;margin:0 6px}
-.vs .h{font-family:'Barlow',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.04em;
-  text-transform:uppercase;margin-bottom:10px;color:var(--panel-muted)}
-.vs .bad .h{color:#f0847f}.vs .good .h{color:#4fd08c}
-
-/* text-message screenshot */
-.imsg{max-width:340px;margin:0 auto;font-family:'Barlow',sans-serif}
-.imsg .hd{display:flex;align-items:center;gap:9px;justify-content:center;
-  color:var(--panel-muted);font-size:12px;margin-bottom:14px}
-.imsg .hd .pf{width:30px;height:30px;border-radius:50%;background:var(--panel-3);
-  display:grid;place-items:center;color:var(--panel-ink);font-weight:700;font-size:12px}
-.bub{max-width:80%;padding:10px 14px;border-radius:18px;font-size:14.5px;line-height:1.4;
-  margin-bottom:8px;position:relative}
-.bub.in{background:#2f2a22;color:var(--panel-ink);border-bottom-left-radius:5px;margin-right:auto}
-.bub.out{background:var(--brand);color:#211500;border-bottom-right-radius:5px;margin-left:auto;font-weight:500}
-.imsg .stamp{text-align:center;font-size:10.5px;color:var(--panel-muted);
-  letter-spacing:.05em;margin:10px 0 2px;text-transform:uppercase}
-.imsg .deliv{text-align:right;font-size:10.5px;color:var(--panel-muted);margin-top:-4px}
-
-/* ---------- CTA ---------- */
-.ctablock{margin:26px 0;text-align:center}
-.cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;
-  background:var(--brand);color:#1c1200;font-family:'Barlow Condensed',sans-serif;font-weight:700;
-  font-size:22px;letter-spacing:.01em;text-transform:uppercase;text-decoration:none;
-  padding:16px 30px;border-radius:12px;box-shadow:0 10px 24px -8px rgba(241,142,35,.6);
-  transition:transform .15s ease,box-shadow .15s ease;line-height:1;max-width:100%}
-.cta:hover{transform:translateY(-2px);box-shadow:0 16px 30px -8px rgba(241,142,35,.7)}
-.cta .arw{transition:transform .2s ease}
-.cta:hover .arw{transform:translateX(4px)}
-.cta.big{font-size:clamp(22px,5vw,30px);padding:19px 34px;width:100%}
-.guar{font-family:'Barlow',sans-serif;font-size:12.5px;color:var(--muted);margin-top:11px;
-  display:flex;align-items:center;justify-content:center;gap:7px}
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;
+  letter-spacing:.02em;text-decoration:none;border-radius:999px;line-height:1;
+  transition:transform .15s ease,box-shadow .15s ease}
+.btn-primary{background:var(--orange);color:#1c1200;font-size:20px;padding:15px 26px;
+  box-shadow:0 12px 28px -8px rgba(241,142,35,.6)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 34px -8px rgba(241,142,35,.7)}
+.btn-ghost{background:transparent;border:1px solid #57514733;color:#fff;font-size:14px;padding:14px 20px;border:1px solid #55504a}
+.btn .arw{transition:transform .2s ease}.btn:hover .arw{transform:translateX(4px)}
+.btn-primary.big{font-size:clamp(22px,4.5vw,30px);padding:19px 34px;width:100%;max-width:520px}
+.guar{font-family:'Barlow',sans-serif;font-size:12.5px;color:var(--muted);margin-top:12px;
+  display:inline-flex;align-items:center;gap:7px}
 .guar svg{width:15px;height:15px;flex:0 0 auto}
+.ctablock{text-align:center;margin:14px 0}
 
-/* ---------- ingredients ---------- */
-.ingr{display:grid;gap:12px}
-.ing{display:flex;gap:15px;align-items:flex-start;background:var(--surface);
-  border:1px solid var(--line);border-radius:14px;padding:15px 16px;box-shadow:var(--shadow-sm)}
-.ing .icon{flex:0 0 auto;width:52px;height:52px;border-radius:12px;background:var(--brand);
-  display:grid;place-items:center}
-.ing .icon svg{width:30px;height:30px;color:#1c1200}
-.ing .txt h4{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;
-  margin:1px 0 3px;color:var(--ink);letter-spacing:.005em}
-.ing .txt h4 .mg{color:var(--brand-ink);font-size:14px;font-family:'Barlow',sans-serif;
-  font-weight:700;letter-spacing:.02em}
-.ing .txt p{font-size:14.5px;line-height:1.5;margin:0;color:var(--body)}
+/* ---------- intro band ---------- */
+.intro{padding:clamp(40px,5vw,64px) 0 8px}
+.intro .lede{font-size:clamp(19px,2.3vw,23px);line-height:1.55;color:var(--ink);max-width:24ch}
+.introgrid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(24px,4vw,48px);align-items:start}
+.introgrid p{margin:0 0 16px}
+.introgrid .side{font-family:'Barlow',sans-serif;font-size:12.5px;color:var(--muted)}
+.pullquote{font-family:'Lora',serif;font-style:italic;font-size:clamp(20px,2.6vw,26px);
+  line-height:1.4;color:var(--ink);border-left:4px solid var(--orange);padding:4px 0 4px 22px;margin:8px 0 0}
+.rule{height:1px;background:var(--line);margin:20px 0}
+.tiny{font-family:'Barlow',sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:700;color:var(--muted)}
 
-/* ---------- reddit cards ---------- */
-.reddit-wrap{display:grid;gap:16px;margin:22px 0}
-.rd{background:var(--surface);border:1px solid var(--line);border-radius:14px;
-  box-shadow:var(--shadow-sm);overflow:hidden;font-family:'Barlow',system-ui,sans-serif}
-.rd .top{display:flex;align-items:center;gap:8px;padding:11px 14px 6px;font-size:12.5px}
-.rd .sub{width:22px;height:22px;border-radius:50%;background:var(--brand);color:#1c1200;
-  display:grid;place-items:center;font-weight:700;font-size:12px;flex:0 0 auto}
-.rd .subn{font-weight:700;color:var(--ink)}
-.rd .meta{color:var(--muted)}
-.rd .join{margin-left:auto;color:#fff;background:#0a6cff;border:none;border-radius:999px;
-  font-weight:700;font-size:11.5px;padding:5px 12px;font-family:'Barlow',sans-serif}
-.rd .body{padding:2px 14px 10px}
-.rd .ttl{font-family:'Barlow',sans-serif;font-weight:600;font-size:16px;color:var(--ink);
-  line-height:1.3;margin:2px 0 6px}
-.rd .body p{font-family:'Lora',serif;font-size:14.5px;line-height:1.55;margin:0 0 8px;color:var(--body)}
-.rd .flair{display:inline-block;background:var(--good-soft);color:var(--good);border-radius:4px;
-  font-size:10.5px;font-weight:700;letter-spacing:.03em;padding:2px 7px;text-transform:uppercase;margin-bottom:8px}
-.rd .actions{display:flex;align-items:center;gap:16px;padding:8px 14px;border-top:1px solid var(--line-soft);
-  color:var(--muted);font-size:12.5px;font-weight:600}
-.rd .vote{display:flex;align-items:center;gap:6px}
-.rd .vote .up{color:var(--brand-ink)}
-.rd .act{display:flex;align-items:center;gap:5px}
-.rd .actions svg{width:15px;height:15px}
-.rd .award{display:flex;align-items:center;gap:3px;color:var(--gold)}
-.rd .comment{background:var(--bg);border-top:1px solid var(--line-soft);padding:10px 14px 12px}
-.rd .comment .cmeta{font-size:11.5px;color:var(--muted);margin-bottom:4px}
-.rd .comment .cmeta b{color:var(--ink)}
-.rd .comment p{font-family:'Lora',serif;font-size:13.5px;line-height:1.5;margin:0;color:var(--body)}
-.social-note{font-family:'Barlow',sans-serif;font-size:11.5px;color:var(--muted);
-  text-align:center;margin:-2px 0 0}
+/* ---------- reasons (numbered story grid) ---------- */
+.reasons{padding:clamp(30px,4vw,44px) 0 10px}
+.reason{padding:clamp(28px,4vw,44px) 0;border-top:1px solid var(--line)}
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,4vw,46px);align-items:center}
+.reason.flip .rcopy{order:2}
+.rcopy .rnum{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(48px,7vw,74px);
+  line-height:.8;color:var(--orange);letter-spacing:-.04em}
+.rcopy .tag{display:inline-block;background:var(--ink);color:#fff;font-family:'Barlow',sans-serif;
+  font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:6px 10px;
+  border-radius:4px;margin:14px 0 12px}
+.rcopy h2{font-size:clamp(26px,3.6vw,40px);line-height:1.02;margin-bottom:14px}
+.rcopy p{margin:0 0 15px;color:var(--body);font-size:clamp(16px,1.9vw,18px)}
+.rcopy p:last-child{margin-bottom:0}
+.rcopy strong{color:var(--ink)}
+figure.rvisual{margin:0}
+.tile{position:relative;aspect-ratio:1/1;background:var(--panel);border-radius:16px;overflow:hidden;
+  box-shadow:var(--shadow);border:1px solid var(--panel-line);
+  background-image:radial-gradient(circle at 80% 12%,rgba(241,142,35,.22),transparent 45%)}
+.tile-in{position:absolute;inset:0;display:flex;flex-direction:column;padding:clamp(16px,3.2vw,26px)}
+.tile .cap{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(0,0,0,.55));
+  padding:26px 18px 14px;color:#e9e0d2;font-family:'Barlow',sans-serif;font-size:12.5px;line-height:1.35}
+.tile .toplab{font-family:'Barlow',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--orange);display:flex;align-items:center;gap:8px;margin-bottom:auto}
+.tile .toplab svg{width:16px;height:16px}
+.tile svg.art{width:100%;height:auto}
+.stamp{position:absolute;right:-10px;top:-10px;z-index:3;background:var(--orange);color:#1c1200;
+  border-radius:50%;width:82px;height:82px;display:grid;place-items:center;text-align:center;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;line-height:1;
+  transform:rotate(9deg);box-shadow:0 8px 20px rgba(0,0,0,.25);padding:6px}
+figcaption{font-family:'Barlow',sans-serif;font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.4}
+.on{color:var(--panel-ink)}
+@media(max-width:760px){.rgrid{grid-template-columns:1fr;gap:18px}
+  .reason.flip .rcopy{order:0}.tile{max-width:520px}}
+
+/* mini comparison inside tiles */
+.duo{display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:center;margin-top:8px}
+.duo .lbl{font-family:'Barlow',sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.06em;
+  text-transform:uppercase;text-align:center;margin-bottom:6px}
+.duo .bad{color:#f0847f}.duo .good{color:var(--cell)}
+.duo .mid{font-family:'Barlow Condensed',sans-serif;font-weight:700;color:var(--panel-muted);font-size:14px}
+
+/* ---------- inline CTA ribbon ---------- */
+.ribbon{background:var(--panel);border-radius:16px;padding:clamp(22px,4vw,32px);margin:8px 0;
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;
+  box-shadow:var(--shadow);border:1px solid var(--panel-line);
+  background-image:radial-gradient(circle at 90% 10%,rgba(241,142,35,.22),transparent 50%)}
+.ribbon .rt{color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:clamp(20px,3vw,28px);line-height:1.05;max-width:22ch}
+.ribbon .rt small{display:block;font-family:'Barlow',sans-serif;font-weight:400;font-size:13px;
+  color:var(--panel-muted);letter-spacing:.02em;margin-top:6px;text-transform:none}
+
+/* ---------- comparison band ---------- */
+.band{background:var(--panel);color:#fff;padding:clamp(44px,6vw,72px) 0;position:relative;overflow:hidden}
+.band:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 15% 20%,rgba(241,142,35,.18),transparent 40%)}
+.bandgrid{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,44px);align-items:center}
+.band h2{color:#fff;font-size:clamp(28px,4vw,46px);line-height:1.02;margin-bottom:14px}
+.band p{color:#d5cdc0;font-size:17px}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ccard{background:#1e1a14;border:1px solid var(--panel-line);border-radius:14px;padding:18px}
+.ccard.win{border-color:var(--orange);background:#241a10}
+.ccard .h{font-family:'Barlow',sans-serif;font-weight:700;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--panel-muted);margin-bottom:12px}
+.ccard.win .h{color:var(--orange)}
+.ccard ul{list-style:none;margin:0;padding:0;font-family:'Barlow',sans-serif;font-size:13.5px;color:#e4dbce}
+.ccard li{display:flex;gap:8px;align-items:flex-start;margin-bottom:9px;line-height:1.35}
+.ccard li svg{width:15px;height:15px;flex:0 0 auto;margin-top:2px}
+.ccard .x{color:#f0847f}.ccard .c{color:var(--cell)}
 
 /* ---------- stats ---------- */
-.stats{background:var(--panel);border-radius:16px;padding:26px 20px 22px;margin:26px 0;
-  box-shadow:var(--shadow);border:1px solid var(--panel-line)}
-.stats h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#fff;font-size:24px;
-  text-align:center;margin:0 0 4px;letter-spacing:.01em}
-.stats .sub{font-family:'Barlow',sans-serif;font-size:12px;color:var(--panel-muted);
-  text-align:center;margin:0 0 22px}
-.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.stat{text-align:center}
-.ring{position:relative;width:96px;height:96px;margin:0 auto 8px}
+.stats{padding:clamp(36px,5vw,56px) 0}
+.stats h2{text-align:center;font-size:clamp(26px,3.6vw,38px);margin-bottom:4px}
+.stats .sub{text-align:center;font-family:'Barlow',sans-serif;font-size:12.5px;color:var(--muted);margin:0 0 26px}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:760px;margin:0 auto}
+.stat{text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:16px;
+  padding:22px 12px 18px;box-shadow:var(--shadow-sm)}
+.ring{position:relative;width:104px;height:104px;margin:0 auto 10px}
 .ring svg{transform:rotate(-90deg)}
 .ring .num{position:absolute;inset:0;display:grid;place-items:center;
-  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;color:#fff}
-.stat .cap{font-family:'Barlow',sans-serif;font-size:11.5px;line-height:1.35;color:var(--panel-muted)}
-@media(max-width:440px){.ring{width:82px;height:82px}.ring .num{font-size:22px}}
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:29px;color:var(--ink)}
+.stat .cap{font-family:'Barlow',sans-serif;font-size:12.5px;line-height:1.35;color:var(--muted)}
+@media(max-width:520px){.stat-row{grid-template-columns:1fr;max-width:340px}.stat{display:flex;align-items:center;gap:16px;text-align:left;padding:14px}
+  .ring{margin:0;flex:0 0 auto;width:84px;height:84px}.ring .num{font-size:24px}}
 
-/* trust strip */
-.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0}
-.trust .t{background:var(--surface);border:1px solid var(--line);border-radius:12px;
-  padding:14px 10px;text-align:center;box-shadow:var(--shadow-sm)}
-.trust .t svg{width:26px;height:26px;color:var(--brand-ink);margin:0 auto 6px}
-.trust .t b{font-family:'Barlow Condensed',sans-serif;display:block;font-size:16px;color:var(--ink);line-height:1}
+/* ---------- reddit proof ---------- */
+.proof{padding:clamp(20px,3vw,30px) 0 clamp(36px,5vw,56px)}
+.proof h2{font-size:clamp(26px,3.6vw,38px);margin-bottom:6px}
+.proof .sub{font-family:'Barlow',sans-serif;font-size:13px;color:var(--muted);margin:0 0 22px}
+.reddit-wrap{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:720px){.reddit-wrap{grid-template-columns:1fr}}
+.rd{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-sm);
+  overflow:hidden;font-family:'Barlow',system-ui,sans-serif;display:flex;flex-direction:column}
+.rd .top{display:flex;align-items:center;gap:8px;padding:11px 14px 6px;font-size:12.5px}
+.rd .sub2{width:22px;height:22px;border-radius:50%;background:var(--orange);color:#1c1200;
+  display:grid;place-items:center;font-weight:700;font-size:12px;flex:0 0 auto}
+.rd .subn{font-weight:700;color:var(--ink)}.rd .meta{color:var(--muted);font-size:11.5px}
+.rd .join{margin-left:auto;color:#fff;background:#0a6cff;border:none;border-radius:999px;font-weight:700;font-size:11px;padding:5px 11px}
+.rd .bd{padding:2px 14px 10px}
+.rd .flair{display:inline-block;background:var(--good-soft);color:var(--good);border-radius:4px;
+  font-size:10.5px;font-weight:700;letter-spacing:.03em;padding:2px 7px;text-transform:uppercase;margin-bottom:8px}
+.rd .ttl{font-weight:600;font-size:15.5px;color:var(--ink);line-height:1.3;margin:2px 0 6px}
+.rd .bd p{font-family:'Lora',serif;font-size:14px;line-height:1.55;margin:0;color:var(--body)}
+.rd .act{display:flex;align-items:center;gap:15px;padding:8px 14px;border-top:1px solid var(--line-soft);
+  color:var(--muted);font-size:12.5px;font-weight:600;margin-top:auto}
+.rd .act svg{width:15px;height:15px}.rd .up{color:var(--orange-ink)}
+.rd .vote{display:flex;align-items:center;gap:6px}
+.rd .cmt{background:var(--paper);border-top:1px solid var(--line-soft);padding:9px 14px 11px}
+.rd .cmt .cm{font-size:11px;color:var(--muted);margin-bottom:3px}.rd .cmt .cm b{color:var(--ink)}
+.rd .cmt p{font-family:'Lora',serif;font-size:13px;line-height:1.5;margin:0;color:var(--body)}
+.social-note{font-family:'Barlow',sans-serif;font-size:11.5px;color:var(--muted);text-align:center;margin:14px 0 0}
+
+/* ---------- ingredients ---------- */
+.ingredients{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:clamp(44px,6vw,72px) 0}
+.ing-head{text-align:center;max-width:640px;margin:0 auto 30px}
+.ing-head h2{font-size:clamp(28px,4vw,44px);margin:8px 0 10px}
+.ing-head p{margin:0;color:var(--muted);font-size:16px}
+.ing-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:720px){.ing-grid{grid-template-columns:1fr}}
+.ing{display:flex;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:16px;
+  padding:18px 18px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+.ing:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--orange)}
+.ing .icon{flex:0 0 auto;width:58px;height:58px;border-radius:14px;background:var(--orange);display:grid;place-items:center}
+.ing .icon svg{width:32px;height:32px;color:#1c1200}
+.ing .txt{flex:1;min-width:0}
+.ing .nm{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px}
+.ing .nm h3{font-size:21px;line-height:1}
+.ing .dose{font-family:'Barlow',sans-serif;font-weight:700;font-size:11.5px;color:var(--orange-ink);
+  background:var(--orange-soft);padding:3px 8px;border-radius:999px;letter-spacing:.02em}
+.ing .targets{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 8px}
+.ing .chip{font-family:'Barlow',sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--teal);border:1px solid #bfe0d8;background:#eaf6f2;border-radius:999px;padding:3px 8px}
+.ing .chip.t{color:var(--orange-ink);border-color:#f2d3ac;background:#fdf1e2}
+.ing p{font-family:'Lora',serif;font-size:14px;line-height:1.5;margin:0;color:var(--body)}
+.ing.full{grid-column:1/-1;align-items:center;background:var(--panel);border-color:var(--panel-line)}
+.ing.full:before{display:none}
+.ing.full .icon{background:#2c251d}.ing.full .icon svg{color:var(--orange)}
+.ing.full .nm h3{color:#fff}.ing.full p{color:var(--panel-muted)}
+.label-proof{display:flex;align-items:center;gap:22px;flex-wrap:wrap;justify-content:center;margin-top:26px}
+.label-proof img{width:200px;border-radius:14px;box-shadow:var(--shadow);flex:0 0 auto}
+.label-proof .lp{max-width:360px}
+.label-proof .lp h3{font-size:22px;margin-bottom:8px}
+.label-proof .lp p{font-family:'Lora',serif;font-size:14.5px;color:var(--body);margin:0}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px;max-width:640px;margin-left:auto;margin-right:auto}
+.trust .t{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 8px;text-align:center}
+.trust .t svg{width:24px;height:24px;color:var(--orange-ink);margin:0 auto 6px}
+.trust .t b{font-family:'Barlow Condensed',sans-serif;display:block;font-size:15px;color:var(--ink)}
 .trust .t span{font-family:'Barlow',sans-serif;font-size:11px;color:var(--muted)}
 
-/* ---------- offer box ---------- */
-.offer{background:var(--panel);border-radius:18px;overflow:hidden;margin:30px 0;
-  box-shadow:var(--shadow);border:1px solid var(--panel-line)}
-.offer .flag{background:var(--brand);color:#1c1200;text-align:center;
-  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:19px;letter-spacing:.05em;
-  padding:9px;text-transform:uppercase}
-.offer-in{display:grid;grid-template-columns:150px 1fr;gap:18px;padding:20px}
-.offer-in img{border-radius:12px;align-self:center;width:150px;object-fit:cover;object-position:center 42%;aspect-ratio:150/210}
-.offer .name{font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#fff;font-size:26px;line-height:1;margin:2px 0 2px}
-.offer .sub2{font-family:'Barlow',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
-.offer ul{list-style:none;margin:0 0 14px;padding:0;font-family:'Barlow',sans-serif;font-size:13.5px;color:var(--panel-ink)}
-.offer li{display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;line-height:1.35}
-.offer li svg{width:16px;height:16px;color:var(--good);flex:0 0 auto;margin-top:1px}
-.offer .price{display:flex;align-items:baseline;gap:9px;margin-bottom:12px}
-.offer .price .now{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:34px;color:#fff;line-height:1}
-.offer .price .was{font-size:16px;color:var(--panel-muted);text-decoration:line-through}
-.offer .price .save{background:var(--good);color:#04240f;font-family:'Barlow',sans-serif;font-weight:700;
-  font-size:11px;padding:3px 8px;border-radius:6px;letter-spacing:.03em}
-@media(max-width:520px){.offer-in{grid-template-columns:1fr;text-align:center}
-  .offer-in img{margin:0 auto}.offer .price{justify-content:center}.offer ul{max-width:280px;margin:0 auto 14px}
-  .offer li{text-align:left}}
+/* ---------- callout ---------- */
+.callout{max-width:var(--maxw);margin:clamp(30px,4vw,44px) auto;padding:0 clamp(16px,4vw,32px)}
+.callout .box{background:var(--orange-soft);border:1px solid var(--orange);border-left-width:5px;
+  border-radius:14px;padding:20px 22px;font-family:'Lora',serif;font-size:16px;line-height:1.55;color:var(--ink)}
+
+/* ---------- offer ---------- */
+.offer{padding:clamp(44px,6vw,72px) 0}
+.offer-card{background:var(--panel);border-radius:22px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--panel-line)}
+.offer-flag{background:var(--orange);color:#1c1200;text-align:center;font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:clamp(16px,2.4vw,21px);letter-spacing:.05em;padding:10px;text-transform:uppercase}
+.offer-in{display:grid;grid-template-columns:300px 1fr;gap:clamp(20px,4vw,40px);padding:clamp(22px,4vw,36px);align-items:center}
+.offer-in .shot{background:radial-gradient(circle at 50% 40%,#2c251d,#141210);border-radius:16px;padding:14px}
+.offer-in .shot img{border-radius:10px;width:100%;object-fit:cover;object-position:center 42%;aspect-ratio:3/4}
+.offer .name{font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#fff;font-size:clamp(28px,4vw,38px);line-height:.95}
+.offer .name .o{color:var(--orange)}
+.offer .sub2{font-family:'Barlow',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin:4px 0 14px}
+.offer ul{list-style:none;margin:0 0 16px;padding:0;font-family:'Barlow',sans-serif;font-size:14px;color:var(--panel-ink)}
+.offer li{display:flex;gap:9px;align-items:flex-start;margin-bottom:8px;line-height:1.35}
+.offer li svg{width:17px;height:17px;color:var(--cell);flex:0 0 auto;margin-top:1px}
+.offer .price{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.offer .price .now{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:44px;color:#fff;line-height:1}
+.offer .price .was{font-size:18px;color:var(--panel-muted);text-decoration:line-through}
+.offer .price .save{background:var(--good);color:#04240f;font-family:'Barlow',sans-serif;font-weight:700;font-size:11.5px;padding:4px 9px;border-radius:6px}
+.offer .fine{font-family:'Barlow',sans-serif;font-size:11.5px;color:var(--panel-muted);margin-top:10px}
+@media(max-width:640px){.offer-in{grid-template-columns:1fr;text-align:center}.offer-in .shot{max-width:240px;margin:0 auto}
+  .offer .price{justify-content:center}.offer ul{max-width:300px;margin:0 auto 16px;text-align:left}
+  .offer .name{font-size:32px}}
 
 /* ---------- FAQ ---------- */
-.faq{margin:24px 0}
-.faq h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;color:var(--ink);margin:0 0 14px}
-.faq details{border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:var(--surface);
-  box-shadow:var(--shadow-sm);overflow:hidden}
-.faq summary{list-style:none;cursor:pointer;padding:15px 46px 15px 17px;position:relative;
-  font-family:'Barlow',sans-serif;font-weight:600;font-size:15.5px;color:var(--ink)}
+.faq{max-width:820px;margin:0 auto;padding:clamp(30px,4vw,48px) clamp(16px,4vw,32px) clamp(40px,5vw,60px)}
+.faq h2{font-size:clamp(26px,3.6vw,38px);margin-bottom:16px;text-align:center}
+.faq details{border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:var(--surface);box-shadow:var(--shadow-sm);overflow:hidden}
+.faq summary{list-style:none;cursor:pointer;padding:16px 48px 16px 18px;position:relative;
+  font-family:'Barlow',sans-serif;font-weight:600;font-size:16px;color:var(--ink)}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";position:absolute;right:16px;top:50%;transform:translateY(-50%);
-  font-family:'Barlow',sans-serif;font-weight:400;font-size:26px;color:var(--brand-ink);transition:transform .2s ease;line-height:1}
+.faq summary::after{content:"+";position:absolute;right:18px;top:50%;transform:translateY(-50%);
+  font-family:'Barlow',sans-serif;font-size:26px;color:var(--orange-ink);transition:transform .2s ease}
 .faq details[open] summary::after{transform:translateY(-50%) rotate(45deg)}
-.faq .a{padding:0 17px 16px;font-size:15px;line-height:1.6;color:var(--body)}
+.faq .a{padding:0 18px 16px;font-size:15px;line-height:1.6;color:var(--body)}
+
+/* ---------- final CTA ---------- */
+.final{background:var(--orange);color:#1c1200;padding:clamp(46px,6vw,74px) 0}
+.final-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,50px);align-items:center}
+.final h2{color:#1c1200;font-size:clamp(34px,5vw,60px);line-height:.98;margin-bottom:14px}
+.final p{color:#3a2405;font-size:18px;max-width:44ch;margin:0 0 22px}
+.final .btn-dark{background:var(--panel);color:#fff;font-size:clamp(20px,4vw,28px);padding:19px 32px;
+  border-radius:999px;display:inline-flex;gap:10px;align-items:center;text-decoration:none;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase}
+.final .btn-dark:hover{transform:translateY(-2px)}
+.final .guar{color:#3a2405}.final .guar svg{stroke:#1c1200}
+.final-art{background:#f7a23f;border:1px solid #ffbc6a;border-radius:18px;padding:16px;transform:rotate(-1.6deg);box-shadow:0 24px 50px rgba(120,60,0,.25)}
+.final-art img{border-radius:10px;aspect-ratio:1/1;object-fit:cover}
+@media(max-width:760px){.final-grid{grid-template-columns:1fr}.final-art{max-width:380px;margin:0 auto;transform:none}}
+
+/* ---------- footer ---------- */
+.foot{padding:clamp(28px,4vw,40px) clamp(16px,4vw,32px) 96px;max-width:var(--maxw);margin:0 auto;
+  color:var(--muted);font-family:'Barlow',sans-serif;font-size:11px;line-height:1.55}
+.foot .fbrand{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;color:var(--ink);text-transform:uppercase;margin-bottom:8px}
+.foot .fbrand em{color:var(--orange-ink);font-style:normal}
+.foot p{margin:0 0 10px}
 
 /* ---------- sticky CTA ---------- */
 .sticky{position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--panel);
-  border-top:1px solid var(--panel-line);box-shadow:0 -8px 24px -12px rgba(0,0,0,.5);
+  border-top:1px solid var(--panel-line);box-shadow:0 -8px 24px -12px rgba(0,0,0,.4);
   transform:translateY(110%);transition:transform .3s ease}
 .sticky.show{transform:translateY(0)}
-.sticky-in{max-width:var(--maxw);margin:0 auto;padding:9px 14px;display:flex;align-items:center;gap:12px}
+.sticky-in{max-width:var(--maxw);margin:0 auto;padding:9px clamp(14px,4vw,24px);display:flex;align-items:center;gap:12px}
 .sticky img{width:40px;height:40px;border-radius:8px;object-fit:cover;object-position:center 42%;flex:0 0 auto}
-.sticky .st-txt{line-height:1.1;font-family:'Barlow',sans-serif;flex:1;min-width:0}
-.sticky .st-txt b{font-family:'Barlow Condensed',sans-serif;color:#fff;font-size:16px;display:block;letter-spacing:.02em}
-.sticky .st-txt span{font-size:11px;color:var(--panel-muted)}
-.sticky a.cta{font-size:16px;padding:12px 18px;border-radius:10px;white-space:nowrap;
-  animation:pulse 2.4s ease-in-out infinite}
-@keyframes pulse{0%,100%{box-shadow:0 6px 16px -6px rgba(241,142,35,.6)}
-  50%{box-shadow:0 6px 26px 0 rgba(241,142,35,.85)}}
-@media(max-width:420px){.sticky .st-txt span{display:none}.sticky a.cta{font-size:15px;padding:11px 15px}}
+.sticky .st{flex:1;min-width:0;font-family:'Barlow',sans-serif;line-height:1.1}
+.sticky .st b{font-family:'Barlow Condensed',sans-serif;color:#fff;font-size:16px;display:block;letter-spacing:.02em}
+.sticky .st span{font-size:11px;color:var(--panel-muted)}
+.sticky .btn-primary{font-size:16px;padding:12px 18px;border-radius:10px;white-space:nowrap;animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 6px 16px -6px rgba(241,142,35,.6)}50%{box-shadow:0 6px 26px 0 rgba(241,142,35,.9)}}
+@media(max-width:430px){.sticky .st span{display:none}.sticky .btn-primary{font-size:15px;padding:11px 15px}}
 
-/* footer */
-.foot{max-width:var(--maxw);margin:0 auto;padding:26px 22px 40px;color:var(--muted);
-  font-family:'Barlow',sans-serif;font-size:11px;line-height:1.55}
-.foot p{margin:0 0 10px}
-.foot .fbrand{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;
-  color:var(--ink);letter-spacing:.02em;text-transform:uppercase;margin-bottom:8px}
-.foot .fbrand em{color:var(--brand-ink);font-style:normal}
-
-/* animation utilities */
-.grow{transform-box:fill-box;transform-origin:bottom;animation:grow 1.1s cubic-bezier(.2,.8,.2,1) both}
-@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+/* animation */
 .no-cell{animation:flow 2.6s linear infinite}
-@keyframes flow{from{transform:translateX(-14px);opacity:0}
-  10%{opacity:1}90%{opacity:1}to{transform:translateX(150px);opacity:0}}
-@media (prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important}
-  .grow{transform:none}
-}
+@keyframes flow{from{transform:translateX(-16px);opacity:0}12%{opacity:1}88%{opacity:1}to{transform:translateX(150px);opacity:0}}
+.grow{transform-box:fill-box;transform-origin:bottom;animation:grow 1.2s cubic-bezier(.2,.8,.2,1) both}
+@keyframes grow{from{transform:scaleY(.04)}to{transform:scaleY(1)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.grow{transform:none}}
 </style>
 </head>
 <body>
-<div class="promo">&#128293; <b>Buy 2 Get 1 Free</b> <span class="sep">&bull;</span> 60-Day Money-Back Guarantee <span class="sep">&bull;</span> Free Returns</div>
-
-<header class="mast">
-  <div class="mast-in">
-    <a class="mast-brand" href="#">
-      <span class="hi">HEALTH<em>INSIDER</em></span>
-      <span class="tag">Magazine</span>
-    </a>
-    <nav class="mast-nav"><span>Men's Health</span><span>Nutrition</span><span>Longevity</span></nav>
+<header class="top">
+  <div class="topin">
+    <a class="brand" href="#top"><span class="hi">HEALTH<em>INSIDER</em></span><span class="tag">Magazine</span></a>
+    <span class="topmeta">Sponsored Editorial &middot; Men's Health</span>
   </div>
+  <div class="progress" id="progress"></div>
 </header>
 
-<main class="article">
-  <div class="pad">
-    <span class="kicker"><span class="dot"></span>Men's Health &middot; Diabetes &middot; Advertorial</span>
-    <h1>8 Reasons Diabetic Men Are Taking This Natural Capsule To <span class="hl">Get Their Erections Back</span></h1>
-    <p class="dek">Primal Storm goes after the blood flow and testosterone diabetes has been quietly draining &mdash; <b>working for men who thought the blue pill was their only option left.</b></p>
+<span id="top"></span>
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="wrap hero-in">
+    <div>
+      <div class="eyebrow">From 10,000+ Diabetic Men Already On It</div>
+      <div class="meta"><span>By <b>Dr. Marcus Reed</b>, Men's Metabolic Health Researcher</span><span>Updated Sept 17, 2026</span><span>8 min read</span></div>
+      <h1>8 Reasons Diabetic Men Are Taking This Natural Capsule To <span class="hl">Get Their Erections Back</span></h1>
+      <p class="lead">Primal Storm goes after the blood flow and testosterone diabetes has been quietly draining &mdash; <b>working for men who thought the blue pill was their only option left.</b></p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="https://www.primal-storm.com/products/primal-storm" target="_blank" rel="noopener">Check Availability <span class="arw">&rarr;</span></a>
+        <a class="btn btn-ghost" href="#reasons">Read the 8 reasons &darr;</a>
+      </div>
+      <div class="hero-foot"><span><span class="star">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.8/5 &middot; 10,000+ men</span><span>60-day money-back guarantee</span><span>Free returns</span></div>
+    </div>
+    <div class="hero-art">
+      <img src="assets/hero.jpg" alt="Primal Storm — natural blood flow and testosterone support, 90 capsules">
+      <span class="badge">Editorial / Product Story</span>
+    </div>
+  </div>
+</section>
 
-    <div class="byline">
-      <div class="ava">M</div>
-      <div class="who">
-        <b>By Dr. Marcus Reed</b> &mdash; Men's Metabolic Health Researcher<br>
-        Reviewed Sept 17, 2026 &middot; 7 min read &middot; <span class="verify">&#10004; Medically fact-checked</span> &middot; <span class="stars-i">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+<!-- ===================== INTRO ===================== -->
+<section class="wrap intro">
+  <div class="introgrid">
+    <div>
+      <p class="lede">The blue pill used to be the safety net. Now, more and more of the time, even that isn't enough.</p>
+      <div class="rule"></div>
+      <p class="tiny">Problem &rarr; mechanism &rarr; proof &rarr; action</p>
+    </div>
+    <div>
+      <p>If you're a diabetic man, you already know the feeling. This is the fix tens of thousands of diabetic men have quietly switched to instead &mdash; and the reason it works comes down to something the blue pill was never built to touch.</p>
+      <p class="pullquote">"Primal Storm supports the blood flow and testosterone diabetes actually attacks, restoring what high blood sugar has been quietly draining for years."</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== REASONS ===================== -->
+<main class="wrap reasons" id="reasons">
+
+  <!-- R1 -->
+  <section class="reason">
+    <div class="rgrid">
+      <div class="rcopy">
+        <div class="rnum">01</div><span class="tag">The routine</span>
+        <h2>It Gets You Hard Without Watching A Clock</h2>
+        <p>Most diabetic men who've tried the blue pill know the routine. Take it, wait, watch the clock, hope. And for a lot of them, it stops being enough &mdash; one pill becomes a higher dose, then two drugs stacked and maxed out, because it's forcing blood through vessels that are already damaged instead of fixing what's actually broken.</p>
+        <p><strong>Primal Storm doesn't force anything for a few hours.</strong> Three capsules a day, and your body starts building its own blood flow and testosterone back &mdash; so you're not planning your night around a pill and hoping it's enough this time.</p>
+      </div>
+      <figure class="rvisual">
+        <div class="tile">
+          <div class="tile-in">
+            <div class="toplab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg>The clock vs. the fix</div>
+            <div class="duo">
+              <div><div class="lbl bad">The blue pill</div>
+                <svg class="art" viewBox="0 0 150 120" role="img" aria-label="A clock crossed out, blood forced for a short window">
+                  <circle cx="70" cy="52" r="38" fill="none" stroke="#f0847f" stroke-width="4"/>
+                  <line x1="70" y1="52" x2="70" y2="27" stroke="#f0847f" stroke-width="4" stroke-linecap="round"/>
+                  <line x1="70" y1="52" x2="90" y2="60" stroke="#f0847f" stroke-width="4" stroke-linecap="round"/>
+                  <line x1="40" y1="22" x2="100" y2="82" stroke="#d7433b" stroke-width="6" stroke-linecap="round"/>
+                  <text x="70" y="112" text-anchor="middle" fill="#f0847f" font-family="Barlow,sans-serif" font-size="11" font-weight="700">FORCE IT ~45 MIN</text>
+                </svg></div>
+              <div class="mid">VS</div>
+              <div><div class="lbl good">Primal Storm</div>
+                <svg class="art" viewBox="0 0 150 120" role="img" aria-label="A steady baseline, ready without timing">
+                  <path d="M14 66 H136" fill="none" stroke="#4fd08c" stroke-width="5" stroke-linecap="round"/>
+                  <circle cx="14" cy="66" r="5" fill="#4fd08c"/><circle cx="136" cy="66" r="5" fill="#4fd08c"/>
+                  <text x="75" y="42" text-anchor="middle" fill="#4fd08c" font-family="Barlow Condensed,sans-serif" font-size="19" font-weight="700">ALWAYS READY</text>
+                  <text x="75" y="108" text-anchor="middle" fill="#b7ab9a" font-family="Barlow,sans-serif" font-size="10" font-weight="600">NO TIMING &middot; NO CLOCK</text>
+                </svg></div>
+            </div>
+          </div>
+          <div class="cap">Readiness stops being something you schedule around a pill.</div>
+        </div>
+        <figcaption>The blue pill forces blood through damaged vessels for a short window. Primal Storm rebuilds the blood flow and testosterone underneath.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- R2 -->
+  <section class="reason flip">
+    <div class="rgrid">
+      <div class="rcopy">
+        <div class="rnum">02</div><span class="tag">The first sign</span>
+        <h2>Morning Wood Comes Back, Not Just Once In A While</h2>
+        <p>Ask any diabetic man how he actually knows something's wrong, and most say the same thing. Morning wood disappeared first. Not every few days. Gone.</p>
+        <p><strong>It's usually the first thing to come back too.</strong> Men taking Primal Storm consistently report noticing it again within the first couple weeks, before anything else changes &mdash; that's your body telling you the blood flow is opening back up.</p>
+      </div>
+      <figure class="rvisual">
+        <div class="tile">
+          <span class="stamp">FIRST<br>SIGN</span>
+          <div class="tile-in">
+            <div class="toplab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v3M4.9 7 7 9M2 14h3M19 14h3M17 9l2.1-2M6 18a6 6 0 1 1 12 0"/><path d="M3 18h18M6 21h12"/></svg>Morning function &middot; first 14 days</div>
+            <svg class="art" viewBox="0 0 320 210" role="img" aria-label="Bar chart rising across 14 days, first sign around day 10" style="margin-top:auto">
+              <line x1="30" y1="170" x2="312" y2="170" stroke="#3a3227" stroke-width="1.5"/>
+              <g>
+                <rect class="grow" style="animation-delay:.05s" x="40"  y="156" width="20" height="14"  rx="3" fill="#5a4a30"/>
+                <rect class="grow" style="animation-delay:.12s" x="67"  y="148" width="20" height="22"  rx="3" fill="#6b5836"/>
+                <rect class="grow" style="animation-delay:.19s" x="94"  y="136" width="20" height="34"  rx="3" fill="#8a6a2f"/>
+                <rect class="grow" style="animation-delay:.26s" x="121" y="120" width="20" height="50"  rx="3" fill="#b07f24"/>
+                <rect class="grow" style="animation-delay:.33s" x="148" y="102" width="20" height="68"  rx="3" fill="#d18f1c"/>
+                <rect class="grow" style="animation-delay:.40s" x="175" y="84"  width="20" height="86"  rx="3" fill="#f18e23"/>
+                <rect class="grow" style="animation-delay:.47s" x="202" y="68"  width="20" height="102" rx="3" fill="#f6a23f"/>
+                <rect class="grow" style="animation-delay:.54s" x="229" y="54"  width="20" height="116" rx="3" fill="#4fd08c"/>
+                <rect class="grow" style="animation-delay:.61s" x="256" y="44"  width="20" height="126" rx="3" fill="#4fd08c"/>
+                <rect class="grow" style="animation-delay:.68s" x="283" y="38"  width="20" height="132" rx="3" fill="#4fd08c"/>
+              </g>
+              <text x="50"  y="186" text-anchor="middle" fill="#8a7d6c" font-family="Barlow,sans-serif" font-size="10">Day 1</text>
+              <text x="185" y="186" text-anchor="middle" fill="#8a7d6c" font-family="Barlow,sans-serif" font-size="10">Day 7</text>
+              <text x="293" y="186" text-anchor="middle" fill="#8a7d6c" font-family="Barlow,sans-serif" font-size="10">Day 14</text>
+              <line x1="239" y1="30" x2="239" y2="54" stroke="#4fd08c" stroke-width="1.5" stroke-dasharray="3 3"/>
+              <rect x="188" y="16" width="104" height="17" rx="8" fill="#173026" stroke="#4fd08c"/>
+              <text x="240" y="28" text-anchor="middle" fill="#4fd08c" font-family="Barlow,sans-serif" font-size="10" font-weight="700">&#127749; IT'S BACK</text>
+            </svg>
+          </div>
+          <div class="cap">The earliest signal circulation is opening back up.</div>
+        </div>
+        <figcaption>What men report: the first flicker of morning function usually returns inside the first couple of weeks. Individual results vary.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- R3 -->
+  <section class="reason">
+    <div class="rgrid">
+      <div class="rcopy">
+        <div class="rnum">03</div><span class="tag">The quiet math</span>
+        <h2>You Stop Planning Sex Around Your Blood Sugar</h2>
+        <p>If you're diabetic, you already know the quiet math. Run your sugar too low and nothing happens. Run it too high and the same thing. A lot of diabetic men have built an entire private routine around it &mdash; timing things, eating something first, hoping tonight's a good night, and never telling anyone that's what they're actually doing.</p>
+        <p><strong>Supporting the actual blood flow and testosterone underneath means you're not gambling on your numbers every single time.</strong> Your body just works, the way it used to.</p>
+      </div>
+      <figure class="rvisual">
+        <div class="tile">
+          <div class="tile-in">
+            <div class="toplab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l2 5 4-12 2 7h6"/></svg>The gamble &mdash; cancelled</div>
+            <div class="duo">
+              <div><svg class="art" viewBox="0 0 150 150" role="img" aria-label="A glucometer reading in a warning band">
+                <rect x="40" y="14" width="70" height="120" rx="14" fill="#211c16" stroke="#3a3227" stroke-width="2"/>
+                <rect x="49" y="26" width="52" height="42" rx="6" fill="#0d0b08"/>
+                <text x="75" y="54" text-anchor="middle" fill="#f0847f" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="24">243</text>
+                <text x="75" y="64" text-anchor="middle" fill="#b7ab9a" font-family="Barlow,sans-serif" font-size="7">mg/dL</text>
+                <rect x="49" y="78" width="16" height="9" rx="2" fill="#4fd08c"/><rect x="67" y="78" width="16" height="9" rx="2" fill="#e6b34a"/><rect x="85" y="78" width="16" height="9" rx="2" fill="#f0847f"/>
+                <text x="75" y="104" text-anchor="middle" fill="#b7ab9a" font-family="Barlow,sans-serif" font-size="8.5">"Good night tonight?"</text>
+                <text x="75" y="122" text-anchor="middle" fill="#f0847f" font-family="Barlow,sans-serif" font-size="9" font-weight="700">TOO HIGH &rarr; NOTHING</text>
+              </svg></div>
+              <div class="mid">&rarr;</div>
+              <div><svg class="art" viewBox="0 0 150 150" role="img" aria-label="Works regardless of the number">
+                <circle cx="75" cy="60" r="38" fill="none" stroke="#4fd08c" stroke-width="5"/>
+                <path d="M58 60 l12 12 22 -26" fill="none" stroke="#4fd08c" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                <text x="75" y="122" text-anchor="middle" fill="#4fd08c" font-family="Barlow Condensed,sans-serif" font-size="17" font-weight="700">IT JUST WORKS</text>
+                <text x="75" y="138" text-anchor="middle" fill="#b7ab9a" font-family="Barlow,sans-serif" font-size="9">No timing the numbers</text>
+              </svg></div>
+            </div>
+          </div>
+          <div class="cap">Tonight stops being a bet on your blood sugar.</div>
+        </div>
+        <figcaption>By supporting the blood flow and testosterone underneath, Primal Storm takes tonight off the blood-sugar gamble.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- CTA ribbon -->
+  <div class="ribbon">
+    <div class="rt">Rebuild the blood flow diabetes has been draining.<small>60-day money-back guarantee &middot; free returns, no questions asked</small></div>
+    <a class="btn btn-primary" href="https://www.primal-storm.com/products/primal-storm" target="_blank" rel="noopener">Check Availability <span class="arw">&rarr;</span></a>
+  </div>
+
+  <!-- R4 -->
+  <section class="reason flip">
+    <div class="rgrid">
+      <div class="rcopy">
+        <div class="rnum">04</div><span class="tag">Testosterone</span>
+        <h2>The Testosterone Diabetes Locked Away Comes Back Online</h2>
+        <p>Diabetic men run lower on testosterone than other men, consistently, and it's rarely the first thing anyone checks. Some men only find out their number is under 200 after months of chasing the wrong fix entirely.</p>
+        <p><strong>Fadogia Agrestis and Tongkat Ali go straight after that.</strong> Fadogia restarts your body's own production at the source. Tongkat, at a 100:1 extract, frees up testosterone that's already there but locked away where your body can't use it. Your drive comes back with it &mdash; not just the ability to perform.</p>
+      </div>
+      <figure class="rvisual">
+        <div class="tile">
+          <div class="tile-in">
+            <div class="toplab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21a9 9 0 1 1 9-9"/><path d="M12 12l6-4"/></svg>T-levels &middot; back online</div>
+            <svg class="art" viewBox="0 0 300 172" role="img" aria-label="Gauge needle swinging from under 200 into a healthy range" style="margin:auto 0">
+              <path d="M40 150 A110 110 0 0 1 260 150" fill="none" stroke="#2c251d" stroke-width="20" stroke-linecap="round"/>
+              <path d="M40 150 A110 110 0 0 1 96 63" fill="none" stroke="#d7433b" stroke-width="20" stroke-linecap="round"/>
+              <path d="M96 63 A110 110 0 0 1 150 40" fill="none" stroke="#e6b34a" stroke-width="20"/>
+              <path d="M150 40 A110 110 0 0 1 260 150" fill="none" stroke="#4fd08c" stroke-width="20" stroke-linecap="round"/>
+              <line x1="150" y1="150" x2="196" y2="72" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="150" cy="150" r="9" fill="#fff"/>
+              <text x="46" y="169" fill="#f0847f" font-family="Barlow,sans-serif" font-size="11" font-weight="700">&lt;200</text>
+              <text x="254" y="169" text-anchor="end" fill="#4fd08c" font-family="Barlow,sans-serif" font-size="11" font-weight="700">HEALTHY</text>
+              <text x="150" y="118" text-anchor="middle" fill="#fff" font-family="Barlow Condensed,sans-serif" font-size="30" font-weight="700">T-LEVELS</text>
+              <text x="150" y="138" text-anchor="middle" fill="#f6a23f" font-family="Barlow,sans-serif" font-size="10.5" font-weight="700" letter-spacing="1">RESTARTED AT THE SOURCE</text>
+            </svg>
+          </div>
+          <div class="cap"><b style="color:var(--orange)">Fadogia</b> restarts production &middot; <b style="color:var(--orange)">Tongkat 100:1</b> unlocks what's already there.</div>
+        </div>
+        <figcaption>Two levers on one problem: Fadogia restarts production, Tongkat Ali (a concentrated 100:1 extract) unlocks the testosterone your body already made but couldn't use.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- R5 centerpiece -->
+  <section class="reason">
+    <div class="rgrid">
+      <div class="rcopy">
+        <div class="rnum">05</div><span class="tag">The mechanism</span>
+        <h2>It Goes After The Actual Villain, Not Just The Symptom</h2>
+        <p>Here's what almost nobody explains. The artery that feeds your erections is one of the smallest in your body, and years of high blood sugar scar it up, narrow it, and choke off the blood it's supposed to carry. That's not your age. That's damage that's been building quietly for years, and the less blood it lets through, the less reliable everything down there becomes.</p>
+        <p><strong>Beetroot floods that damaged vessel with nitric oxide and forces it back open.</strong> Fadogia and Tongkat bring back the testosterone locked away underneath it. Piperine makes sure none of it goes to waste. That's the whole fight &mdash; blood flow and testosterone, both restored, instead of one pill forcing a few hours and quitting.</p>
+      </div>
+      <figure class="rvisual">
+        <div class="tile">
+          <div class="tile-in">
+            <div class="toplab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h5l2-3 4 6 2-3h5"/></svg>Inside the vessel that feeds erections</div>
+            <svg class="art" viewBox="0 0 320 220" role="img" aria-label="Top: a narrowed artery scarred by high blood sugar. Bottom: the same artery opened by nitric oxide with blood flowing." style="margin:auto 0">
+              <defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#4fd08c"/></marker></defs>
+              <text x="8" y="18" fill="#f0847f" font-family="Barlow,sans-serif" font-size="11" font-weight="700">BEFORE &middot; scarred &amp; narrowed</text>
+              <rect x="8" y="26" width="304" height="58" rx="29" fill="#241a17" stroke="#5c3b38" stroke-width="2"/>
+              <path d="M8 55 q58 -30 114 0 q58 30 114 0 q38 -20 76 0 v29 h-304 z" fill="#4a2b28" opacity=".9"/>
+              <path d="M8 55 q58 30 114 0 q58 -30 114 0 q38 20 76 0 v-29 h-304 z" fill="#4a2b28" opacity=".9"/>
+              <path d="M8 55 h304" stroke="#7a4a45" stroke-width="5" stroke-dasharray="2 6"/>
+              <circle cx="34" cy="55" r="4" fill="#d7433b"/><circle cx="286" cy="55" r="4" fill="#d7433b" opacity=".5"/>
+              <text x="160" y="104" text-anchor="middle" fill="#f0847f" font-family="Barlow,sans-serif" font-size="10.5" font-weight="700">Barely any blood gets through</text>
+              <text x="8" y="140" fill="#4fd08c" font-family="Barlow,sans-serif" font-size="11" font-weight="700">AFTER &middot; nitric oxide forces it open</text>
+              <rect x="8" y="148" width="304" height="58" rx="29" fill="#12241d" stroke="#2f7a5f" stroke-width="2"/>
+              <rect x="8" y="164" width="304" height="26" fill="#0f2b21"/>
+              <g>
+                <circle class="no-cell" style="animation-delay:0s"   cx="26" cy="171" r="6" fill="#4fd08c"/>
+                <circle class="no-cell" style="animation-delay:.4s"  cx="26" cy="183" r="6" fill="#5bd894"/>
+                <circle class="no-cell" style="animation-delay:.8s"  cx="26" cy="176" r="6" fill="#3ec37e"/>
+                <circle class="no-cell" style="animation-delay:1.2s" cx="26" cy="185" r="6" fill="#4fd08c"/>
+                <circle class="no-cell" style="animation-delay:1.6s" cx="26" cy="170" r="6" fill="#6fe0a6"/>
+                <circle class="no-cell" style="animation-delay:2.0s" cx="26" cy="179" r="6" fill="#4fd08c"/>
+              </g>
+              <path d="M232 177 h68" stroke="#4fd08c" stroke-width="2" marker-end="url(#ar)"/>
+            </svg>
+          </div>
+          <div class="cap"><b style="color:var(--orange)">Beetroot</b> nitric oxide &middot; <b style="color:var(--orange)">Fadogia + Tongkat</b> testosterone &middot; <b style="color:var(--orange)">Piperine</b> absorption.</div>
+        </div>
+        <figcaption>Illustration of the mechanism described in the copy &mdash; not a medical image.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- R6 -->
+  <section class="reason flip">
+    <div class="rgrid">
+      <div class="rcopy">
+        <div class="rnum">06</div><span class="tag">The brush-off</span>
+        <h2>No More "It's Just Your Age" From A Doctor Who Barely Looked Up</h2>
+        <p>A lot of diabetic men describe the exact same appointment. The doctor glances at the chart for two minutes, says the numbers look fine, and hands over a prescription without explaining anything. No mention of blood flow. No mention of testosterone. Just &mdash; you're diabetic, here's Cialis, let me know if it works.</p>
+        <p><strong>You deserve to actually understand what's happening to your own body</strong> &mdash; not just get handed a pill and sent home.</p>
+      </div>
+      <figure class="rvisual">
+        <div class="tile">
+          <div class="tile-in" style="justify-content:center;gap:8px">
+            <div class="toplab" style="margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.5 7.2L3 21l1.8-6.5A8 8 0 1 1 21 12z"/></svg>The 2-minute appointment</div>
+            <div style="max-width:270px;width:100%;margin:0 auto;font-family:'Barlow',sans-serif">
+              <div style="text-align:center;font-size:10px;color:#8a7d6c;letter-spacing:.06em;margin-bottom:8px">TODAY &middot; 9:14 AM</div>
+              <div style="max-width:82%;background:#2f2a22;color:#f4ece0;border-radius:16px;border-bottom-left-radius:5px;padding:9px 12px;font-size:13px;line-height:1.35;margin-bottom:7px">Everything down there stopped working. Is it the diabetes?</div>
+              <div style="max-width:82%;margin-left:auto;background:var(--orange);color:#211500;border-radius:16px;border-bottom-right-radius:5px;padding:9px 12px;font-size:13px;line-height:1.35;margin-bottom:7px;font-weight:500">Numbers look fine. It's your age.</div>
+              <div style="max-width:82%;margin-left:auto;background:var(--orange);color:#211500;border-radius:16px;border-bottom-right-radius:5px;padding:9px 12px;font-size:13px;line-height:1.35;font-weight:500">You're diabetic &mdash; here's Cialis. LMK if it works.</div>
+              <div style="text-align:right;font-size:10px;color:#8a7d6c;margin:3px 2px 10px">Delivered</div>
+              <div style="max-width:82%;background:#2f2a22;color:#f4ece0;border-radius:16px;border-bottom-left-radius:5px;padding:9px 12px;font-size:13px;line-height:1.35">&hellip;what about my blood flow? My testosterone?</div>
+              <div style="text-align:center;font-size:10px;color:#7a6f60;margin-top:8px">&mdash; no reply &mdash;</div>
+            </div>
+          </div>
+        </div>
+        <figcaption>Blood flow never comes up. Testosterone never comes up. Primal Storm exists for the men who wanted an actual answer.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- R7 -->
+  <section class="reason">
+    <div class="rgrid">
+      <div class="rcopy">
+        <div class="rnum">07</div><span class="tag">Stamina</span>
+        <h2>You Go More Than One Round Instead Of Hoping For One</h2>
+        <p>Once the blood flow and testosterone are actually supported instead of forced for an hour, men report something they didn't expect. They're not just getting hard &mdash; they're lasting, and going again without needing a second pill.</p>
+        <p><strong>Panax Ginseng crushes the cortisol that's been quietly draining your drive</strong> on top of everything diabetes was already doing. Stamina isn't an accident &mdash; it's the whole system finally working together.</p>
+      </div>
+      <figure class="rvisual">
+        <div class="tile">
+          <div class="tile-in">
+            <div class="toplab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>Stamina that holds</div>
+            <svg class="art" viewBox="0 0 320 180" role="img" aria-label="Blue pill spikes then crashes after one round; Primal Storm holds through a second round" style="margin:auto 0">
+              <line x1="24" y1="146" x2="308" y2="146" stroke="#3a3227" stroke-width="1.5"/>
+              <path d="M24 136 C64 136 78 44 104 44 C134 44 144 138 196 140 C256 142 296 141 308 141" fill="none" stroke="#f0847f" stroke-width="3" stroke-dasharray="5 4"/>
+              <text x="106" y="36" text-anchor="middle" fill="#f0847f" font-family="Barlow,sans-serif" font-size="10" font-weight="700">crash after one</text>
+              <path d="M24 138 C74 126 90 62 148 58 C206 54 250 60 308 56" fill="none" stroke="#4fd08c" stroke-width="4"/>
+              <circle cx="148" cy="58" r="4" fill="#4fd08c"/><circle cx="292" cy="56" r="4" fill="#4fd08c"/>
+              <g font-family="Barlow,sans-serif" font-size="10" font-weight="700">
+                <rect x="118" y="72" width="62" height="17" rx="8" fill="#173026"/><text x="149" y="84" text-anchor="middle" fill="#4fd08c">ROUND 1</text>
+                <rect x="248" y="70" width="62" height="17" rx="8" fill="#173026"/><text x="279" y="82" text-anchor="middle" fill="#4fd08c">ROUND 2</text>
+              </g>
+              <text x="166" y="166" text-anchor="middle" fill="#b7ab9a" font-family="Barlow,sans-serif" font-size="9.5">Panax Ginseng crushes the cortisol draining your drive</text>
+            </svg>
+          </div>
+          <div class="cap">The tank doesn't empty after one round.</div>
+        </div>
+        <figcaption>The blue pill forces a spike that fades. With circulation, testosterone and cortisol handled together, men report lasting longer.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- R8 -->
+  <section class="reason flip">
+    <div class="rgrid">
+      <div class="rcopy">
+        <div class="rnum">08</div><span class="tag">The guarantee</span>
+        <h2>It's Backed By A Guarantee Because We Know You've Been Burned Before</h2>
+        <p>You've probably tried something before that didn't work. A supplement, a different pill, a fix that promised the world and did nothing. So this comes with a full 60-day money-back guarantee.</p>
+        <p><strong>Worst case, you take every capsule and you get refunded anyway.</strong> Best case, you join tens of thousands of men who trusted Primal Storm, got their blood flow back, and started waking up hard again.</p>
+      </div>
+      <figure class="rvisual">
+        <div class="tile">
+          <div class="tile-in" style="align-items:center;justify-content:center;text-align:center">
+            <svg class="art" viewBox="0 0 130 130" width="150" style="width:min(56%,180px);margin-bottom:16px" role="img" aria-label="60-day money-back guarantee medallion">
+              <circle cx="65" cy="65" r="60" fill="none" stroke="var(--orange)" stroke-width="3"/>
+              <circle cx="65" cy="65" r="52" fill="none" stroke="var(--orange)" stroke-width="1.5" stroke-dasharray="2 4"/>
+              <text x="65" y="54" text-anchor="middle" fill="var(--orange)" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="44">60</text>
+              <text x="65" y="73" text-anchor="middle" fill="#fff" font-family="Barlow,sans-serif" font-weight="700" font-size="14" letter-spacing="1">DAY</text>
+              <text x="65" y="94" text-anchor="middle" fill="#b7ab9a" font-family="Barlow,sans-serif" font-weight="700" font-size="9" letter-spacing="1.5">MONEY-BACK</text>
+            </svg>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#fff;font-size:clamp(20px,3.6vw,26px);line-height:1.05;max-width:22ch">Worst case, you get refunded. Best case, you're waking up hard again.</div>
+          </div>
+          <div class="cap">Take every capsule. Don't feel a real difference? Send it back &mdash; no questions asked.</div>
+        </div>
+        <figcaption>A full 60-day money-back guarantee with free returns, no questions asked.</figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== COMPARISON BAND ===================== -->
+<section class="band">
+  <div class="wrap bandgrid">
+    <div>
+      <div class="eyebrow" style="color:var(--orange)">The honest comparison</div>
+      <h2>The blue pill forces an hour. Primal Storm rebuilds the cause.</h2>
+      <p>One pushes blood through vessels that are already damaged for a few hours, then quits. The other supports the blood flow and testosterone underneath, so your body does the work &mdash; the way it used to.</p>
+    </div>
+    <div class="compare">
+      <div class="ccard">
+        <div class="h">The blue pill</div>
+        <ul>
+          <li><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18"/></svg>Forces blood for ~1 hour, then quits</li>
+          <li><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18"/></svg>Does nothing for testosterone</li>
+          <li><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18"/></svg>Plan your night around a clock</li>
+          <li><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18"/></svg>Higher doses over time</li>
+        </ul>
+      </div>
+      <div class="ccard win">
+        <div class="h">Primal Storm</div>
+        <ul>
+          <li><svg class="c" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5 9-11"/></svg>Rebuilds blood flow at the source</li>
+          <li><svg class="c" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5 9-11"/></svg>Restarts &amp; unlocks testosterone</li>
+          <li><svg class="c" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5 9-11"/></svg>No timing, no clock &mdash; 3 caps daily</li>
+          <li><svg class="c" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5 9-11"/></svg>Works alongside your diabetes meds</li>
+        </ul>
       </div>
     </div>
   </div>
+</section>
 
-  <div class="pad">
-    <p class="lede">If you're a diabetic man, you already know the feeling. The blue pill used to be the safety net &mdash; and now, more and more of the time, even that isn't enough. This is the fix tens of thousands of diabetic men have quietly switched to instead, and the reason it works comes down to something the blue pill was never built to touch.</p>
-
-    <p class="pullquote">"Primal Storm supports the blood flow and testosterone diabetes actually attacks &mdash; restoring what high blood sugar has been quietly draining for years."</p>
-
-    <!-- ===================== REASON 1 ===================== -->
-    <section class="reason">
-      <div class="rnum"><span class="n">1</span><span class="lab">Reason One</span><span class="bar"></span></div>
-      <h2>It Gets You Hard Without Watching A Clock</h2>
-      <p>Most diabetic men who've tried the blue pill know the routine. Take it, wait, watch the clock, hope. And for a lot of them, it stops being enough. One pill becomes a higher dose, then two drugs stacked and maxed out at the same time, because it's forcing blood through vessels that are already damaged instead of fixing what's actually broken.</p>
-      <p>Primal Storm doesn't force anything for a few hours. Three capsules a day, and your body starts building its own blood flow and testosterone back, so you're not planning your night around a pill and hoping it's enough this time.</p>
-
-      <figure aria-label="The blue-pill routine versus a daily-support approach">
-        <div class="fig-pad">
-          <p class="fig-eyebrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M12 1h0M9 2h6"/></svg>The clock vs. the fix</p>
-          <div class="vs">
-            <div class="col bad">
-              <div class="h">The blue pill</div>
-              <svg viewBox="0 0 150 130" role="img" aria-label="A clock crossed out, blood forced for a short window">
-                <circle cx="55" cy="55" r="40" fill="none" stroke="#f0847f" stroke-width="4"/>
-                <line x1="55" y1="55" x2="55" y2="28" stroke="#f0847f" stroke-width="4" stroke-linecap="round"/>
-                <line x1="55" y1="55" x2="76" y2="62" stroke="#f0847f" stroke-width="4" stroke-linecap="round"/>
-                <line x1="24" y1="24" x2="86" y2="86" stroke="#c62828" stroke-width="6" stroke-linecap="round"/>
-                <text x="55" y="120" text-anchor="middle" fill="#f0847f" font-family="Barlow,sans-serif" font-size="12" font-weight="700">FORCE IT ~45 MIN</text>
-              </svg>
-            </div>
-            <div class="vsbadge">VS</div>
-            <div class="col good">
-              <div class="h">Primal Storm</div>
-              <svg viewBox="0 0 150 130" role="img" aria-label="A steady baseline, ready without timing">
-                <line x1="10" y1="95" x2="140" y2="95" stroke="#3a3227" stroke-width="1.5"/>
-                <path d="M12 78 H138" fill="none" stroke="#4fd08c" stroke-width="5" stroke-linecap="round"/>
-                <circle cx="12" cy="78" r="5" fill="#4fd08c"/><circle cx="138" cy="78" r="5" fill="#4fd08c"/>
-                <text x="75" y="58" text-anchor="middle" fill="#4fd08c" font-family="Barlow Condensed,sans-serif" font-size="20" font-weight="700">ALWAYS READY</text>
-                <text x="75" y="120" text-anchor="middle" fill="#b7ab9a" font-family="Barlow,sans-serif" font-size="11" font-weight="600">NO TIMING &middot; NO CLOCK</text>
-              </svg>
-            </div>
-          </div>
-        </div>
-        <figcaption>The blue pill forces blood through damaged vessels for a short window. Primal Storm rebuilds the blood flow and testosterone underneath &mdash; so readiness stops being something you schedule.</figcaption>
-      </figure>
-    </section>
-
-    <!-- ===================== REASON 2 ===================== -->
-    <section class="reason">
-      <div class="rnum"><span class="n">2</span><span class="lab">Reason Two</span><span class="bar"></span></div>
-      <h2>Morning Wood Comes Back, Not Just Once In A While</h2>
-      <p>Ask any diabetic man how he actually knows something's wrong, and most say the same thing. Morning wood disappeared first. Not every few days. Gone.</p>
-      <p>It's usually the first thing to come back too. Men taking Primal Storm consistently report noticing it again within the first couple weeks &mdash; before anything else changes. That's your body telling you the blood flow is opening back up.</p>
-
-      <figure aria-label="Morning function returning over the first two weeks">
-        <div class="fig-pad">
-          <p class="fig-eyebrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v3M4.9 7 7 9M2 14h3M19 14h3M17 9l2.1-2M12 18a6 6 0 1 0-6-6"/><path d="M4 18h16M6 21h12"/></svg>Morning function &middot; first 14 days</p>
-          <svg viewBox="0 0 340 190" role="img" aria-label="Bar chart rising across 14 days with the first sign marked around day 10">
-            <line x1="34" y1="150" x2="330" y2="150" stroke="#3a3227" stroke-width="1.5"/>
-            <line x1="34" y1="150" x2="34" y2="24" stroke="#3a3227" stroke-width="1.5"/>
-            <text x="8" y="150" fill="#7d7263" font-family="Barlow,sans-serif" font-size="10">0</text>
-            <text x="8" y="30" fill="#7d7263" font-family="Barlow,sans-serif" font-size="10">Hi</text>
-            <g class="bars">
-              <rect class="grow" style="animation-delay:.05s" x="44"  y="138" width="20" height="12"  rx="3" fill="#5a4a30"/>
-              <rect class="grow" style="animation-delay:.12s" x="72"  y="132" width="20" height="18"  rx="3" fill="#6b5836"/>
-              <rect class="grow" style="animation-delay:.19s" x="100" y="122" width="20" height="28"  rx="3" fill="#8a6a2f"/>
-              <rect class="grow" style="animation-delay:.26s" x="128" y="108" width="20" height="42"  rx="3" fill="#b07f24"/>
-              <rect class="grow" style="animation-delay:.33s" x="156" y="92"  width="20" height="58"  rx="3" fill="#d18f1c"/>
-              <rect class="grow" style="animation-delay:.40s" x="184" y="74"  width="20" height="76"  rx="3" fill="#f18e23"/>
-              <rect class="grow" style="animation-delay:.47s" x="212" y="60"  width="20" height="90"  rx="3" fill="#f6a23f"/>
-              <rect class="grow" style="animation-delay:.54s" x="240" y="48"  width="20" height="102" rx="3" fill="#4fd08c"/>
-              <rect class="grow" style="animation-delay:.61s" x="268" y="40"  width="20" height="110" rx="3" fill="#4fd08c"/>
-              <rect class="grow" style="animation-delay:.68s" x="296" y="34"  width="20" height="116" rx="3" fill="#4fd08c"/>
-            </g>
-            <text x="54"  y="166" text-anchor="middle" fill="#7d7263" font-family="Barlow,sans-serif" font-size="10">Day 1</text>
-            <text x="194" y="166" text-anchor="middle" fill="#7d7263" font-family="Barlow,sans-serif" font-size="10">Day 7</text>
-            <text x="306" y="166" text-anchor="middle" fill="#7d7263" font-family="Barlow,sans-serif" font-size="10">Day 14</text>
-            <g><line x1="250" y1="30" x2="250" y2="48" stroke="#4fd08c" stroke-width="1.5" stroke-dasharray="3 3"/>
-            <rect x="196" y="16" width="112" height="18" rx="9" fill="#173026" stroke="#4fd08c" stroke-width="1"/>
-            <text x="252" y="29" text-anchor="middle" fill="#4fd08c" font-family="Barlow,sans-serif" font-size="10.5" font-weight="700">&#127749; THE FIRST SIGN</text></g>
-          </svg>
-        </div>
-        <figcaption>What men report: the first flicker of morning function usually returns inside the first couple of weeks &mdash; the earliest signal that circulation is opening back up. Individual results vary.</figcaption>
-      </figure>
-    </section>
-
-    <!-- ===================== REASON 3 ===================== -->
-    <section class="reason">
-      <div class="rnum"><span class="n">3</span><span class="lab">Reason Three</span><span class="bar"></span></div>
-      <h2>You Stop Planning Sex Around Your Blood Sugar</h2>
-      <p>If you're diabetic, you already know the quiet math. Run your sugar too low and nothing happens. Run it too high and the same thing. A lot of diabetic men have built an entire private routine around it &mdash; timing things, eating something first, hoping tonight's a good night, and never telling anyone that's what they're actually doing.</p>
-      <p>Supporting the actual blood flow and testosterone underneath means you're not gambling on your numbers every single time. Your body just works, the way it used to.</p>
-
-      <figure aria-label="A glucose meter and the mental math it forces, crossed out">
-        <div class="fig-pad">
-          <p class="fig-eyebrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l2 5 4-12 2 7h6"/></svg>The quiet math &mdash; cancelled</p>
-          <div class="vs" style="grid-template-columns:1fr auto 1fr">
-            <div class="col">
-              <svg viewBox="0 0 150 150" role="img" aria-label="A glucometer reading in a warning band">
-                <rect x="34" y="16" width="82" height="118" rx="14" fill="#211c16" stroke="#3a3227" stroke-width="2"/>
-                <rect x="44" y="28" width="62" height="46" rx="7" fill="#0d0b08"/>
-                <text x="75" y="58" text-anchor="middle" fill="#f0847f" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="26">243</text>
-                <text x="75" y="70" text-anchor="middle" fill="#b7ab9a" font-family="Barlow,sans-serif" font-size="8">mg/dL</text>
-                <rect x="44" y="84" width="18" height="10" rx="2" fill="#4fd08c"/>
-                <rect x="66" y="84" width="18" height="10" rx="2" fill="#e6b34a"/>
-                <rect x="88" y="84" width="18" height="10" rx="2" fill="#f0847f"/>
-                <path d="M97 82 l0 -4" stroke="#fff" stroke-width="2"/>
-                <text x="75" y="112" text-anchor="middle" fill="#b7ab9a" font-family="Barlow,sans-serif" font-size="9">"Is tonight a good night?"</text>
-                <text x="75" y="126" text-anchor="middle" fill="#f0847f" font-family="Barlow,sans-serif" font-size="9" font-weight="700">TOO HIGH &rarr; NOTHING</text>
-              </svg>
-            </div>
-            <div class="vsbadge">&rarr;</div>
-            <div class="col good">
-              <svg viewBox="0 0 150 150" role="img" aria-label="Works regardless of the number">
-                <circle cx="75" cy="66" r="40" fill="none" stroke="#4fd08c" stroke-width="5"/>
-                <path d="M58 66 l12 12 22 -26" fill="none" stroke="#4fd08c" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-                <text x="75" y="128" text-anchor="middle" fill="#4fd08c" font-family="Barlow Condensed,sans-serif" font-size="17" font-weight="700">IT JUST WORKS</text>
-                <text x="75" y="143" text-anchor="middle" fill="#b7ab9a" font-family="Barlow,sans-serif" font-size="9.5">No timing the numbers</text>
-              </svg>
-            </div>
-          </div>
-        </div>
-        <figcaption>By supporting the blood flow and testosterone underneath, Primal Storm takes tonight off the blood-sugar gamble &mdash; so you're not doing the quiet math every single time.</figcaption>
-      </figure>
-
-      <div class="ctablock">
-        <a class="cta" href="https://www.primal-storm.com/products/primal-storm" target="_blank" rel="noopener">Check Availability <span class="arw">&rarr;</span></a>
-        <div class="guar"><svg viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z"/><path d="M9 12l2 2 4-4"/></svg>60-day money-back guarantee &middot; free returns, no questions asked</div>
-      </div>
-    </section>
-
-    <!-- ===================== REASON 4 ===================== -->
-    <section class="reason">
-      <div class="rnum"><span class="n">4</span><span class="lab">Reason Four</span><span class="bar"></span></div>
-      <h2>The Testosterone Diabetes Locked Away Comes Back Online</h2>
-      <p>Diabetic men run lower on testosterone than other men, consistently, and it's rarely the first thing anyone checks. Some men only find out their number is under 200 after months of chasing the wrong fix entirely.</p>
-      <p>Fadogia Agrestis and Tongkat Ali go straight after that. Fadogia restarts your body's own production at the source. Tongkat, at a 100:1 extract, frees up testosterone that's already there but locked away where your body can't use it. Your drive comes back with it &mdash; not just the ability to perform.</p>
-
-      <figure aria-label="A testosterone gauge moving from a low reading into a healthy range">
-        <div class="fig-pad">
-          <p class="fig-eyebrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21a9 9 0 1 1 9-9"/><path d="M12 12l6-4"/></svg>Testosterone &middot; back online</p>
-          <svg viewBox="0 0 300 176" role="img" aria-label="Semicircular gauge with the needle swinging from under 200 into a healthy range">
-            <path d="M40 150 A110 110 0 0 1 260 150" fill="none" stroke="#2c251d" stroke-width="20" stroke-linecap="round"/>
-            <path d="M40 150 A110 110 0 0 1 96 63" fill="none" stroke="#c62828" stroke-width="20" stroke-linecap="round"/>
-            <path d="M96 63 A110 110 0 0 1 150 40" fill="none" stroke="#e6b34a" stroke-width="20"/>
-            <path d="M150 40 A110 110 0 0 1 260 150" fill="none" stroke="#4fd08c" stroke-width="20" stroke-linecap="round"/>
-            <g style="transform-box:fill-box;transform-origin:150px 150px" class="needle">
-              <line x1="150" y1="150" x2="196" y2="72" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-            </g>
-            <circle cx="150" cy="150" r="9" fill="#fff"/>
-            <text x="46" y="170" fill="#f0847f" font-family="Barlow,sans-serif" font-size="11" font-weight="700">&lt;200</text>
-            <text x="254" y="170" text-anchor="end" fill="#4fd08c" font-family="Barlow,sans-serif" font-size="11" font-weight="700">HEALTHY</text>
-            <text x="150" y="120" text-anchor="middle" fill="#fff" font-family="Barlow Condensed,sans-serif" font-size="30" font-weight="700">T-LEVELS</text>
-            <text x="150" y="140" text-anchor="middle" fill="#f6a23f" font-family="Barlow,sans-serif" font-size="11" font-weight="700" letter-spacing="1">RESTARTED AT THE SOURCE</text>
-          </svg>
-          <div class="vs" style="margin-top:6px">
-            <div class="col"><div class="h" style="color:#f6a23f">Fadogia Agrestis</div><p style="color:var(--panel-muted);font-family:'Barlow',sans-serif;font-size:12.5px;margin:0;line-height:1.4">Restarts your body's own production at the source.</p></div>
-            <div class="vsbadge">+</div>
-            <div class="col"><div class="h" style="color:#f6a23f">Tongkat 100:1</div><p style="color:var(--panel-muted);font-family:'Barlow',sans-serif;font-size:12.5px;margin:0;line-height:1.4">Frees the testosterone that's there but locked away.</p></div>
-          </div>
-        </div>
-        <figcaption>Two levers on the same problem: Fadogia restarts production, Tongkat Ali (a concentrated 100:1 extract) unlocks the testosterone your body already made but couldn't use. Drive returns with it.</figcaption>
-      </figure>
-    </section>
-
-    <!-- ===================== REASON 5 (centerpiece) ===================== -->
-    <section class="reason">
-      <div class="rnum"><span class="n">5</span><span class="lab">Reason Five</span><span class="bar"></span></div>
-      <h2>It Goes After The Actual Villain, Not Just The Symptom</h2>
-      <p>Here's what almost nobody explains. The artery that feeds your erections is one of the smallest in your body, and years of high blood sugar scar it up, narrow it, and choke off the blood it's supposed to carry. That's not your age. That's damage that's been building quietly for years, and the less blood it lets through, the less reliable everything down there becomes.</p>
-      <p>Beetroot floods that damaged vessel with nitric oxide and forces it back open. Fadogia and Tongkat bring back the testosterone locked away underneath it. Piperine makes sure none of it goes to waste. That's the whole fight &mdash; blood flow and testosterone, both restored, instead of one pill forcing a few hours and quitting.</p>
-
-      <figure aria-label="Cross-section of the artery: scarred and narrowed by high blood sugar, then opened by nitric oxide">
-        <div class="fig-pad">
-          <p class="fig-eyebrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h5l2-3 4 6 2-3h5"/></svg>Inside the vessel that feeds erections</p>
-          <svg viewBox="0 0 340 260" role="img" aria-label="Top: a narrowed artery scarred by high blood sugar with almost no blood getting through. Bottom: the same artery opened wide by nitric oxide with blood flowing freely.">
-            <defs>
-              <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                <path d="M0 0 L10 5 L0 10 z" fill="#b7ab9a"/>
-              </marker>
-            </defs>
-            <!-- BEFORE -->
-            <text x="12" y="24" fill="#f0847f" font-family="Barlow,sans-serif" font-size="12" font-weight="700">BEFORE &middot; scarred &amp; narrowed by high blood sugar</text>
-            <rect x="12" y="34" width="316" height="66" rx="33" fill="#241a17" stroke="#5c3b38" stroke-width="2"/>
-            <!-- plaque narrowing -->
-            <path d="M12 67 q60 -34 120 0 q60 34 120 0 q40 -22 76 0 v33 h-316 z" fill="#4a2b28" opacity=".9"/>
-            <path d="M12 67 q60 34 120 0 q60 -34 120 0 q40 22 76 0 v-33 h-316 z" fill="#4a2b28" opacity=".9"/>
-            <!-- tiny lumen -->
-            <path d="M12 67 h316" stroke="#7a4a45" stroke-width="6" stroke-dasharray="2 6"/>
-            <circle cx="40" cy="67" r="4" fill="#c62828"/>
-            <circle cx="300" cy="67" r="4" fill="#c62828" opacity=".5"/>
-            <text x="170" y="122" text-anchor="middle" fill="#f0847f" font-family="Barlow,sans-serif" font-size="11" font-weight="700">Barely any blood gets through</text>
-
-            <!-- AFTER -->
-            <text x="12" y="164" fill="#4fd08c" font-family="Barlow,sans-serif" font-size="12" font-weight="700">AFTER &middot; nitric oxide forces it back open</text>
-            <rect x="12" y="174" width="316" height="66" rx="33" fill="#12241d" stroke="#2f7a5f" stroke-width="2"/>
-            <rect x="12" y="192" width="316" height="30" fill="#0f2b21"/>
-            <!-- flowing cells -->
-            <g>
-              <circle class="no-cell" style="animation-delay:0s"   cx="30" cy="200" r="6" fill="#4fd08c"/>
-              <circle class="no-cell" style="animation-delay:.4s"  cx="30" cy="212" r="6" fill="#5bd894"/>
-              <circle class="no-cell" style="animation-delay:.8s"  cx="30" cy="205" r="6" fill="#3ec37e"/>
-              <circle class="no-cell" style="animation-delay:1.2s" cx="30" cy="214" r="6" fill="#4fd08c"/>
-              <circle class="no-cell" style="animation-delay:1.6s" cx="30" cy="199" r="6" fill="#6fe0a6"/>
-              <circle class="no-cell" style="animation-delay:2.0s" cx="30" cy="208" r="6" fill="#4fd08c"/>
-            </g>
-            <path d="M244 207 h74" stroke="#4fd08c" stroke-width="2" marker-end="url(#ar)" opacity=".9"/>
-            <text x="170" y="256" text-anchor="middle" fill="#4fd08c" font-family="Barlow,sans-serif" font-size="11" font-weight="700">Blood flows freely again</text>
-          </svg>
-        </div>
-        <figcaption><b style="color:var(--brand)">Beetroot</b> floods the vessel with nitric oxide to force it open &middot; <b style="color:var(--brand)">Fadogia + Tongkat</b> restore the testosterone underneath &middot; <b style="color:var(--brand)">Piperine</b> makes sure none of it goes to waste. Illustration of the mechanism described; not a medical image.</figcaption>
-      </figure>
-    </section>
-
-    <!-- ===================== REASON 6 ===================== -->
-    <section class="reason">
-      <div class="rnum"><span class="n">6</span><span class="lab">Reason Six</span><span class="bar"></span></div>
-      <h2>No More "It's Just Your Age" From A Doctor Who Barely Looked Up</h2>
-      <p>A lot of diabetic men describe the exact same appointment. The doctor glances at the chart for two minutes, says the numbers look fine, and hands over a prescription without explaining anything. No mention of blood flow. No mention of testosterone. Just &mdash; you're diabetic, here's Cialis, let me know if it works.</p>
-      <p>You deserve to actually understand what's happening to your own body &mdash; not just get handed a pill and sent home.</p>
-
-      <figure aria-label="A dismissive two-minute exchange with a doctor, shown as a text thread">
-        <div class="fig-pad">
-          <div class="imsg">
-            <div class="hd"><span class="pf">Dr</span><span>The 2-minute appointment</span></div>
-            <div class="stamp">Today &middot; 9:14 AM</div>
-            <div class="bub in">"Everything down there stopped working. Is it the diabetes?"</div>
-            <div class="bub out">Numbers look fine. It's your age.</div>
-            <div class="bub out">You're diabetic &mdash; here's Cialis. LMK if it works.</div>
-            <div class="deliv">Delivered</div>
-            <div class="bub in" style="margin-top:12px">"&hellip;what about my blood flow? My testosterone?"</div>
-            <div class="stamp" style="color:#7a6f60">&mdash; no reply &mdash;</div>
-          </div>
-        </div>
-        <figcaption>Blood flow never comes up. Testosterone never comes up. Primal Storm exists for the men who wanted an actual answer instead of a two-minute brush-off.</figcaption>
-      </figure>
-
-      <div class="ctablock">
-        <a class="cta" href="https://www.primal-storm.com/products/primal-storm" target="_blank" rel="noopener">Check Availability <span class="arw">&rarr;</span></a>
-        <div class="guar"><svg viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z"/><path d="M9 12l2 2 4-4"/></svg>60-day money-back guarantee &middot; free returns, no questions asked</div>
-      </div>
-    </section>
-
-    <!-- ===================== REASON 7 ===================== -->
-    <section class="reason">
-      <div class="rnum"><span class="n">7</span><span class="lab">Reason Seven</span><span class="bar"></span></div>
-      <h2>You Go More Than One Round Instead Of Hoping For One</h2>
-      <p>Once the blood flow and testosterone are actually supported instead of forced for an hour, men report something they didn't expect. They're not just getting hard &mdash; they're lasting, and going again without needing a second pill.</p>
-      <p>Panax Ginseng crushes the cortisol that's been quietly draining your drive on top of everything diabetes was already doing. Stamina isn't an accident &mdash; it's the whole system finally working together.</p>
-
-      <figure aria-label="Energy that holds for a second round instead of crashing after one">
-        <div class="fig-pad">
-          <p class="fig-eyebrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>Stamina that holds</p>
-          <svg viewBox="0 0 340 170" role="img" aria-label="Two curves: the blue pill spikes then crashes after one round; Primal Storm holds a steady plateau through a second round">
-            <line x1="30" y1="140" x2="330" y2="140" stroke="#3a3227" stroke-width="1.5"/>
-            <line x1="30" y1="140" x2="30" y2="20" stroke="#3a3227" stroke-width="1.5"/>
-            <!-- blue pill: spike then crash -->
-            <path d="M30 130 C70 130 84 40 110 40 C140 40 150 132 200 134 C260 136 300 135 330 135" fill="none" stroke="#f0847f" stroke-width="3" stroke-dasharray="5 4"/>
-            <text x="112" y="32" text-anchor="middle" fill="#f0847f" font-family="Barlow,sans-serif" font-size="10.5" font-weight="700">crash after one</text>
-            <!-- primal: rise then plateau -->
-            <path d="M30 132 C80 120 96 60 150 56 C210 52 250 58 330 54" fill="none" stroke="#4fd08c" stroke-width="4"/>
-            <circle cx="150" cy="56" r="4" fill="#4fd08c"/><circle cx="300" cy="55" r="4" fill="#4fd08c"/>
-            <g font-family="Barlow,sans-serif" font-size="10.5" font-weight="700">
-              <rect x="122" y="70" width="66" height="18" rx="9" fill="#173026"/><text x="155" y="83" text-anchor="middle" fill="#4fd08c">ROUND 1</text>
-              <rect x="262" y="68" width="66" height="18" rx="9" fill="#173026"/><text x="295" y="81" text-anchor="middle" fill="#4fd08c">ROUND 2</text>
-            </g>
-            <text x="180" y="160" text-anchor="middle" fill="#b7ab9a" font-family="Barlow,sans-serif" font-size="10">Panax Ginseng crushes the cortisol draining your drive</text>
-          </svg>
-        </div>
-        <figcaption>The blue pill forces a spike that fades. With circulation, testosterone and cortisol handled together, men report the tank doesn't empty after one round.</figcaption>
-      </figure>
-    </section>
-
-    <!-- ===================== REASON 8 ===================== -->
-    <section class="reason">
-      <div class="rnum"><span class="n">8</span><span class="lab">Reason Eight</span><span class="bar"></span></div>
-      <h2>It's Backed By A Guarantee Because We Know You've Been Burned Before</h2>
-      <p>You've probably tried something before that didn't work. A supplement, a different pill, a fix that promised the world and did nothing. So this comes with a full 60-day money-back guarantee. Worst case, you take every capsule and you get refunded anyway. Best case, you join tens of thousands of men who trusted Primal Storm, got their blood flow back, and started waking up hard again.</p>
-
-      <figure class="light" aria-label="60-day money-back guarantee seal">
-        <div class="fig-pad" style="display:flex;gap:20px;align-items:center;justify-content:center;flex-wrap:wrap">
-          <svg viewBox="0 0 130 130" width="118" role="img" aria-label="60-day money-back guarantee medallion">
-            <circle cx="65" cy="65" r="60" fill="none" stroke="var(--brand)" stroke-width="3"/>
-            <circle cx="65" cy="65" r="52" fill="none" stroke="var(--brand)" stroke-width="1.5" stroke-dasharray="2 4"/>
-            <text x="65" y="52" text-anchor="middle" fill="var(--brand-ink)" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="42">60</text>
-            <text x="65" y="70" text-anchor="middle" fill="var(--ink)" font-family="Barlow,sans-serif" font-weight="700" font-size="13" letter-spacing="1">DAY</text>
-            <text x="65" y="92" text-anchor="middle" fill="var(--muted)" font-family="Barlow,sans-serif" font-weight="700" font-size="9" letter-spacing="1.5">MONEY-BACK</text>
-          </svg>
-          <div style="max-width:300px">
-            <p style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;color:var(--ink);margin:0 0 6px;line-height:1.05">Worst case, you get refunded. Best case, you're waking up hard again.</p>
-            <p style="font-family:'Barlow',sans-serif;font-size:13.5px;color:var(--muted);margin:0">Take every capsule. If you don't feel a real difference, send it back &mdash; no questions asked.</p>
-          </div>
-        </div>
-      </figure>
-    </section>
-
-    <!-- ===================== STATS ===================== -->
-    <div class="stats" id="stats">
-      <h3>What Diabetic Men Are Reporting</h3>
-      <p class="sub">Based on 1,897+ customer surveys &middot; individual results vary</p>
-      <div class="stat-row">
-        <div class="stat">
-          <div class="ring">
-            <svg viewBox="0 0 100 100" width="96" height="96"><circle cx="50" cy="50" r="42" fill="none" stroke="#2c251d" stroke-width="9"/><circle class="rc" data-pct="93" cx="50" cy="50" r="42" fill="none" stroke="#f18e23" stroke-width="9" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"/></svg>
-            <div class="num" data-count="93">93%</div>
-          </div>
-          <div class="cap">reported improved energy</div>
-        </div>
-        <div class="stat">
-          <div class="ring">
-            <svg viewBox="0 0 100 100" width="96" height="96"><circle cx="50" cy="50" r="42" fill="none" stroke="#2c251d" stroke-width="9"/><circle class="rc" data-pct="90" cx="50" cy="50" r="42" fill="none" stroke="#4fd08c" stroke-width="9" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"/></svg>
-            <div class="num" data-count="90">90%</div>
-          </div>
-          <div class="cap">enhanced vitality &amp; drive</div>
-        </div>
-        <div class="stat">
-          <div class="ring">
-            <svg viewBox="0 0 100 100" width="96" height="96"><circle cx="50" cy="50" r="42" fill="none" stroke="#2c251d" stroke-width="9"/><circle class="rc" data-pct="98" cx="50" cy="50" r="42" fill="none" stroke="#f18e23" stroke-width="9" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"/></svg>
-            <div class="num" data-count="98">98%</div>
-          </div>
-          <div class="cap">improved energy &amp; mental clarity</div>
-        </div>
-      </div>
+<!-- ===================== STATS ===================== -->
+<section class="wrap stats" id="stats">
+  <h2>What Diabetic Men Are Reporting</h2>
+  <p class="sub">Based on 1,897+ customer surveys &middot; individual results vary</p>
+  <div class="stat-row">
+    <div class="stat">
+      <div class="ring"><svg viewBox="0 0 100 100" width="104" height="104"><circle cx="50" cy="50" r="42" fill="none" stroke="#eee6d8" stroke-width="9"/><circle class="rc" data-pct="93" cx="50" cy="50" r="42" fill="none" stroke="#f18e23" stroke-width="9" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"/></svg><div class="num" data-count="93">93%</div></div>
+      <div class="cap">reported improved energy after consistent use</div>
     </div>
-
-    <!-- ===================== REDDIT SOCIAL PROOF ===================== -->
-    <h2 style="margin-top:34px">Diabetic Men Are Talking About It</h2>
-    <div class="reddit-wrap">
-      <article class="rd">
-        <div class="top"><span class="sub">d</span><span class="subn">r/diabetes_t2</span><span class="meta">&middot; Posted by u/back_on_track_58 &middot; 9d</span><button class="join">Join</button></div>
-        <div class="body">
-          <span class="flair">&#10003; 3 weeks in</span>
-          <div class="ttl">Morning wood came back before anything else &mdash; didn't expect that</div>
-          <p>58, type 2 for 11 years. The blue pill had basically stopped doing anything. Started the 3 capsules with breakfast and honestly forgot about it. Woke up like a teenager around week two. Not planning around my sugar anymore either. That part alone was worth it.</p>
-        </div>
-        <div class="actions">
-          <span class="vote"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4l7 8h-4v8H9v-8H5z"/></svg><span class="up">2.4k</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20l7-8h-4V4H9v8H5z"/></svg></span>
-          <span class="act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.5 7.2L3 21l1.8-6.5A8 8 0 1 1 21 12z"/></svg>318</span>
-          <span class="award">&#127941;&#128293; 12</span>
-        </div>
-        <div class="comment"><div class="cmeta"><b>u/quiet_win_1972</b> &middot; 6d</div><p>Same here. The "it's just your age" line from my doc is what finally made me try something that actually targets the blood flow. Wish I'd done it sooner.</p></div>
-      </article>
-
-      <article class="rd">
-        <div class="top"><span class="sub">T</span><span class="subn">r/Testosterone</span><span class="meta">&middot; Posted by u/ran_under_200 &middot; 3w</span><button class="join">Join</button></div>
-        <div class="body">
-          <span class="flair">&#10003; verified purchase</span>
-          <div class="ttl">Found out my T was under 200. Nobody ever checked.</div>
-          <p>Diabetic, exhausted, zero drive for years and every doctor just shrugged. The Fadogia + Tongkat combo in this is the real reason I tried it. Energy is back, drive is back, and I'm not stacking two ED drugs anymore. Keeping my diabetes meds exactly the same, this just sits alongside them.</p>
-        </div>
-        <div class="actions">
-          <span class="vote"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4l7 8h-4v8H9v-8H5z"/></svg><span class="up">1.9k</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20l7-8h-4V4H9v8H5z"/></svg></span>
-          <span class="act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.5 7.2L3 21l1.8-6.5A8 8 0 1 1 21 12z"/></svg>204</span>
-          <span class="award">&#127941; 8</span>
-        </div>
-        <div class="comment"><div class="cmeta"><b>u/mike_d_54</b> &middot; 2w</div><p>The 100:1 Tongkat is what sold me too. Most brands hide dosages. This one's all on the label.</p></div>
-      </article>
+    <div class="stat">
+      <div class="ring"><svg viewBox="0 0 100 100" width="104" height="104"><circle cx="50" cy="50" r="42" fill="none" stroke="#eee6d8" stroke-width="9"/><circle class="rc" data-pct="90" cx="50" cy="50" r="42" fill="none" stroke="#1f9d55" stroke-width="9" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"/></svg><div class="num" data-count="90">90%</div></div>
+      <div class="cap">experienced enhanced vitality and drive</div>
     </div>
-    <p class="social-note">Community-style testimonials reflecting reported experiences. Individual results vary.</p>
+    <div class="stat">
+      <div class="ring"><svg viewBox="0 0 100 100" width="104" height="104"><circle cx="50" cy="50" r="42" fill="none" stroke="#eee6d8" stroke-width="9"/><circle class="rc" data-pct="98" cx="50" cy="50" r="42" fill="none" stroke="#f18e23" stroke-width="9" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"/></svg><div class="num" data-count="98">98%</div></div>
+      <div class="cap">noticed improved energy and mental clarity</div>
+    </div>
+  </div>
+</section>
 
-    <!-- ===================== INGREDIENTS ===================== -->
-    <h2 style="margin-top:36px">5 Ingredients, One Mission</h2>
-    <p>Unlike a proprietary blend hiding what's actually in the bottle, every dose in Primal Storm is on the label, in full.</p>
-    <div class="ingr">
+<!-- ===================== REDDIT PROOF ===================== -->
+<section class="wrap proof">
+  <h2>Diabetic Men Are Talking About It</h2>
+  <p class="sub">Pulled from men's health communities</p>
+  <div class="reddit-wrap">
+    <article class="rd">
+      <div class="top"><span class="sub2">d</span><span class="subn">r/diabetes_t2</span><span class="meta">&middot; u/back_on_track_58 &middot; 9d</span><button class="join">Join</button></div>
+      <div class="bd"><span class="flair">&#10003; 3 weeks in</span>
+        <div class="ttl">Morning wood came back before anything else &mdash; didn't expect that</div>
+        <p>58, type 2 for 11 years. The blue pill had basically stopped doing anything. Started the 3 capsules with breakfast and honestly forgot about it. Woke up like a teenager around week two. Not planning around my sugar anymore either.</p>
+      </div>
+      <div class="act"><span class="vote"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4l7 8h-4v8H9v-8H5z"/></svg><span class="up">2.4k</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20l7-8h-4V4H9v8H5z"/></svg></span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.5 7.2L3 21l1.8-6.5A8 8 0 1 1 21 12z"/></svg> 318</span><span style="color:var(--gold)">&#127941; 12</span></div>
+      <div class="cmt"><div class="cm"><b>u/quiet_win_1972</b> &middot; 6d</div><p>Same here. The "it's just your age" line from my doc is what finally made me try something that targets the blood flow.</p></div>
+    </article>
+    <article class="rd">
+      <div class="top"><span class="sub2">T</span><span class="subn">r/Testosterone</span><span class="meta">&middot; u/ran_under_200 &middot; 3w</span><button class="join">Join</button></div>
+      <div class="bd"><span class="flair">&#10003; verified purchase</span>
+        <div class="ttl">Found out my T was under 200. Nobody ever checked.</div>
+        <p>Diabetic, exhausted, zero drive for years and every doctor just shrugged. The Fadogia + Tongkat combo is the real reason I tried it. Energy's back, drive's back, and I'm not stacking two ED drugs anymore. Keeping my diabetes meds exactly the same.</p>
+      </div>
+      <div class="act"><span class="vote"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4l7 8h-4v8H9v-8H5z"/></svg><span class="up">1.9k</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20l7-8h-4V4H9v8H5z"/></svg></span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.5 7.2L3 21l1.8-6.5A8 8 0 1 1 21 12z"/></svg> 204</span><span style="color:var(--gold)">&#127941; 8</span></div>
+      <div class="cmt"><div class="cm"><b>u/mike_d_54</b> &middot; 2w</div><p>The 100:1 Tongkat sold me too. Most brands hide dosages. This one's all on the label.</p></div>
+    </article>
+  </div>
+  <p class="social-note">Community-style testimonials reflecting reported experiences. Individual results vary.</p>
+</section>
+
+<!-- ===================== INGREDIENTS ===================== -->
+<section class="ingredients">
+  <div class="wrap">
+    <div class="ing-head">
+      <div class="eyebrow">5 Ingredients, One Mission</div>
+      <h2>Every Dose On The Label, In Full</h2>
+      <p>Unlike a proprietary blend hiding what's actually in the bottle, every dose in Primal Storm is on the label &mdash; and each one has a job.</p>
+    </div>
+    <div class="ing-grid">
       <div class="ing">
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21c-4 0-7-3-7-7 0-3 3-5 7-5s7 2 7 5c0 4-3 7-7 7z"/><path d="M12 9V4M12 4c1.5-1.5 4-1 4-1s.5 2.5-1 4M12 4c-1.5-1.5-4-1-4-1s-.5 2.5 1 4"/></svg></div>
-        <div class="txt"><h4>Beetroot Extract <span class="mg">500mg</span></h4><p>Floods your body with nitric oxide &mdash; the exact compound that forces scarred, narrowed vessels back open so blood actually gets where it needs to go.</p></div>
+        <div class="txt"><div class="nm"><h3>Beetroot Extract</h3><span class="dose">500mg</span></div>
+          <div class="targets"><span class="chip">Blood flow</span></div>
+          <p>Floods your body with nitric oxide &mdash; the exact compound that forces scarred, narrowed vessels back open so blood gets where it needs to go.</p></div>
       </div>
       <div class="ing">
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h18a9 9 0 0 1-18 0z"/><path d="M8 12c0-2 1.5-3 2-5M13 12c0-2 1.5-3 2-5"/></svg></div>
-        <div class="txt"><h4>Fadogia Agrestis <span class="mg">300mg</span></h4><p>Goes straight to the source and restarts your body's own testosterone production &mdash; the signal diabetes has been quietly shutting down.</p></div>
+        <div class="txt"><div class="nm"><h3>Fadogia Agrestis</h3><span class="dose">300mg</span></div>
+          <div class="targets"><span class="chip t">Testosterone</span></div>
+          <p>Goes straight to the source and restarts your body's own testosterone production &mdash; the signal diabetes has been quietly shutting down.</p></div>
       </div>
       <div class="ing">
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21V9"/><path d="M12 9c0-3 2-5 5-5 0 3-2 5-5 5zM12 12c0-3-2-5-5-5 0 3 2 5 5 5z"/></svg></div>
-        <div class="txt"><h4>Tongkat Ali <span class="mg">400mg &middot; 100:1 Extract</span></h4><p>Ten times more concentrated than the weak extracts most brands sell. Frees the testosterone your body's already making but can't use.</p></div>
+        <div class="txt"><div class="nm"><h3>Tongkat Ali</h3><span class="dose">400mg &middot; 100:1</span></div>
+          <div class="targets"><span class="chip t">Testosterone</span></div>
+          <p>Ten times more concentrated than the weak extracts most brands sell. Frees the testosterone your body's already making but can't use.</p></div>
       </div>
       <div class="ing">
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22c-3 0-5-2-5-6 0-3 2-5 5-9 3 4 5 6 5 9 0 4-2 6-5 6z"/><path d="M12 22V10"/></svg></div>
-        <div class="txt"><h4>Panax Ginseng <span class="mg">300mg</span></h4><p>Opens circulation further and crushes the cortisol that's been choking your drive for years.</p></div>
+        <div class="txt"><div class="nm"><h3>Panax Ginseng</h3><span class="dose">300mg</span></div>
+          <div class="targets"><span class="chip">Blood flow</span><span class="chip t">Drive</span></div>
+          <p>Opens circulation further and crushes the cortisol that's been choking your drive for years.</p></div>
       </div>
-      <div class="ing">
+      <div class="ing full">
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="9" r="2.4"/><circle cx="15" cy="7" r="2"/><circle cx="16" cy="14" r="2.6"/><circle cx="9" cy="16" r="2"/></svg></div>
-        <div class="txt"><h4>Piperine <span class="mg">10mg</span></h4><p>Makes sure your body actually absorbs every bit of the other four instead of losing most of it.</p></div>
+        <div class="txt"><div class="nm"><h3>Piperine</h3><span class="dose" style="background:#2c251d;color:var(--orange)">10mg</span></div>
+          <p>The multiplier. Makes sure your body actually absorbs every bit of the other four &mdash; instead of losing most of it.</p></div>
       </div>
+    </div>
+
+    <div class="label-proof">
+      <img src="assets/label.jpg" alt="Primal Storm supplement facts label">
+      <div class="lp"><h3>Third-party tested. Nothing hidden.</h3><p>Made in an FDA-registered, GMP-certified facility. Every batch is lab tested for purity and potency &mdash; so you know exactly what you're taking and exactly how much.</p></div>
     </div>
 
     <div class="trust">
@@ -729,49 +809,61 @@ svg{display:block;width:100%;height:auto}
       <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-6 9 6v11H3z"/><path d="M9 21V12h6v9"/></svg><b>Made in USA</b><span>FDA-registered, GMP</span></div>
       <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3h6l1 4H8zM8 7h8v13H8z"/><path d="M10 11h4M10 14h4"/></svg><b>3rd-Party Tested</b><span>Purity &amp; potency</span></div>
     </div>
+  </div>
+</section>
 
-    <p style="background:var(--brand-soft);border-radius:12px;padding:16px 18px;font-size:15px;line-height:1.55;color:var(--ink);border:1px solid var(--brand);border-left-width:4px">Keep taking your diabetes medication exactly like you already are. This handles the one thing your diabetes care was never built to touch &mdash; and it's designed to work alongside the numbers you're already tracking, whether your last A1C was a 6 or an 11.</p>
+<div class="callout"><div class="box"><b>Keep taking your diabetes medication exactly like you already are.</b> This handles the one thing your diabetes care was never built to touch &mdash; and it's designed to work alongside the numbers you're already tracking, whether your last A1C was a 6 or an 11.</div></div>
 
-    <!-- ===================== OFFER ===================== -->
-    <div class="offer">
-      <div class="flag">&#128293; Buy 2 Get 1 Free &middot; Today Only</div>
-      <div class="offer-in">
-        <img src="assets/bottle.jpg" alt="Primal Storm bottle, 90 capsules">
-        <div>
-          <div class="name">PRIMAL <span style="color:var(--brand)">STORM</span></div>
-          <div class="sub2">Masculinity Pro Complex &middot; 90 Caps</div>
-          <ul>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-11"/></svg>90-day supply (Buy 2, Get 1 Free)</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-11"/></svg>Every dose on the label, in full</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-11"/></svg>Works alongside your diabetes meds</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-11"/></svg>60-day money-back guarantee</li>
-          </ul>
-          <div class="price"><span class="now">$98</span><span class="was">$147</span><span class="save">SAVE $49</span></div>
-          <a class="cta big" href="https://www.primal-storm.com/products/primal-storm" target="_blank" rel="noopener">Get Primal Storm <span class="arw">&rarr;</span></a>
-        </div>
+<!-- ===================== OFFER ===================== -->
+<section class="wrap offer" id="offer">
+  <div class="offer-card">
+    <div class="offer-flag">&#128293; Buy 2 Get 1 Free &middot; Today Only</div>
+    <div class="offer-in">
+      <div class="shot"><img src="assets/bottle.jpg" alt="Primal Storm bottle, 90 capsules"></div>
+      <div>
+        <div class="name">PRIMAL <span class="o">STORM</span></div>
+        <div class="sub2">Masculinity Pro Complex &middot; 90 Capsules</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-11"/></svg>90-day supply (Buy 2, Get 1 Free)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-11"/></svg>Every dose on the label, in full</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-11"/></svg>Works alongside your diabetes meds</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-11"/></svg>60-day money-back guarantee</li>
+        </ul>
+        <div class="price"><span class="now">$98</span><span class="was">$147</span><span class="save">SAVE $49</span></div>
+        <a class="btn btn-primary big" href="https://www.primal-storm.com/products/primal-storm" target="_blank" rel="noopener">Get Primal Storm <span class="arw">&rarr;</span></a>
+        <div class="fine">60-day money-back guarantee &middot; free returns, no questions asked</div>
       </div>
     </div>
-
-    <!-- ===================== FAQ ===================== -->
-    <div class="faq">
-      <h3>Frequently Asked Questions</h3>
-      <details open><summary>How fast will I see results?</summary><div class="a">Most men notice morning function and energy shifting within the first 7 to 10 days. Full effect builds over 4 to 8 weeks of consistent daily use.</div></details>
-      <details><summary>Will this work if the blue pill barely does anything for me?</summary><div class="a">The blue pill forces blood through vessels for a few hours and does nothing for the actual cause. Primal Storm supports the blood flow and testosterone underneath, which the blue pill never touches.</div></details>
-      <details><summary>I'm on diabetes medication. Is it safe to take alongside it?</summary><div class="a">Primal Storm is natural and third-party tested. Keep taking your diabetes medication exactly as prescribed, and check with your doctor before starting any new supplement &mdash; especially if you're on blood pressure medication.</div></details>
-      <details><summary>How do I take it?</summary><div class="a">Three capsules every morning with water or coffee. No timing, no planning, no powders to mix.</div></details>
-      <details><summary>What if it doesn't work for me?</summary><div class="a">You're covered by a full 60-day money-back guarantee. If you don't feel a real difference, send it back &mdash; no questions asked.</div></details>
-    </div>
-
-    <div class="ctablock" style="margin:30px 0 40px">
-      <a class="cta big" href="https://www.primal-storm.com/products/primal-storm" target="_blank" rel="noopener">Get Your Primal Storm Now <span class="arw">&rarr;</span></a>
-      <div class="guar"><svg viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z"/><path d="M9 12l2 2 4-4"/></svg>60-day money-back guarantee &middot; free returns, no questions asked</div>
-    </div>
   </div>
-</main>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="faq">
+  <h2>Frequently Asked Questions</h2>
+  <details open><summary>How fast will I see results?</summary><div class="a">Most men notice morning function and energy shifting within the first 7 to 10 days. Full effect builds over 4 to 8 weeks of consistent daily use.</div></details>
+  <details><summary>Will this work if the blue pill barely does anything for me?</summary><div class="a">The blue pill forces blood through vessels for a few hours and does nothing for the actual cause. Primal Storm supports the blood flow and testosterone underneath, which the blue pill never touches.</div></details>
+  <details><summary>I'm on diabetes medication. Is it safe to take alongside it?</summary><div class="a">Primal Storm is natural and third-party tested. Keep taking your diabetes medication exactly as prescribed, and check with your doctor before starting any new supplement &mdash; especially if you're on blood pressure medication.</div></details>
+  <details><summary>How do I take it?</summary><div class="a">Three capsules every morning with water or coffee. No timing, no planning, no powders to mix.</div></details>
+  <details><summary>What if it doesn't work for me?</summary><div class="a">You're covered by a full 60-day money-back guarantee. If you don't feel a real difference, send it back &mdash; no questions asked.</div></details>
+</section>
+
+<!-- ===================== FINAL CTA ===================== -->
+<section class="final" id="final">
+  <div class="wrap final-grid">
+    <div>
+      <div class="eyebrow" style="color:#5a3300">The natural next step</div>
+      <h2>Get your blood flow back.<br>Start waking up hard again.</h2>
+      <p>Three capsules a morning. No timing, no clock, no gambling on your numbers. Join the tens of thousands of diabetic men who stopped settling for the blue pill.</p>
+      <a class="btn-dark" href="https://www.primal-storm.com/products/primal-storm" target="_blank" rel="noopener">Get Your Primal Storm Now <span class="arw">&rarr;</span></a>
+      <div class="guar"><svg viewBox="0 0 24 24" fill="none" stroke="#1c1200" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z"/><path d="M9 12l2 2 4-4"/></svg>60-day money-back guarantee &middot; free returns</div>
+    </div>
+    <div class="final-art"><img src="assets/hero.jpg" alt="Primal Storm — 90 capsules"></div>
+  </div>
+</section>
 
 <footer class="foot">
   <div class="fbrand">HEALTH<em>INSIDER</em></div>
-  <p><b>Advertising Disclosure:</b> This page is an advertisement and not a news article, blog, or consumer protection update. It is written for promotional purposes. The story and reviews depicted are illustrative of experiences some customers report and may not reflect your own results.</p>
+  <p><b>Advertising Disclosure:</b> This page is an advertisement and not a news article, blog, or consumer protection update. It is written for promotional purposes. Testimonials are illustrative of experiences some customers report and may not reflect your own results.</p>
   <p>These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. If you are diabetic, on prescription medication, or under medical care, consult your physician before use. Do not stop any prescribed medication. Individual results vary.</p>
   <p>&copy; 2026 Health Insider Magazine. All rights reserved. Primal Storm&reg; is a registered trademark of its respective owner.</p>
 </footer>
@@ -780,46 +872,41 @@ svg{display:block;width:100%;height:auto}
 <div class="sticky" id="sticky">
   <div class="sticky-in">
     <img src="assets/bottle-sm.jpg" alt="Primal Storm">
-    <div class="st-txt"><b>Buy 2 Get 1 Free</b><span>60-day guarantee &middot; free returns</span></div>
-    <a class="cta" href="https://www.primal-storm.com/products/primal-storm" target="_blank" rel="noopener">Check Availability &rarr;</a>
+    <div class="st"><b>Buy 2 Get 1 Free</b><span>60-day guarantee &middot; free returns</span></div>
+    <a class="btn btn-primary" href="https://www.primal-storm.com/products/primal-storm" target="_blank" rel="noopener">Check Availability &rarr;</a>
   </div>
 </div>
 
 <script>
 (function(){
-  // sticky CTA appears after hero
-  var sticky=document.getElementById('sticky');
-  var trigger=document.querySelector('.byline');
-  if('IntersectionObserver' in window && trigger){
-    new IntersectionObserver(function(es){
-      es.forEach(function(e){ sticky.classList.toggle('show', !e.isIntersecting && e.boundingClientRect.top < 0); });
-    },{threshold:0}).observe(trigger);
-  } else { sticky.classList.add('show'); }
-
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-
-  // stat rings + count-up on view
-  var stats=document.getElementById('stats');
-  function runStats(){
-    document.querySelectorAll('.rc').forEach(function(c){
-      var pct=+c.getAttribute('data-pct'); var len=263.9;
-      if(reduce){ c.style.strokeDashoffset = len*(1-pct/100); return; }
-      c.style.transition='stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1)';
-      requestAnimationFrame(function(){ c.style.strokeDashoffset = len*(1-pct/100); });
-    });
-    document.querySelectorAll('.num[data-count]').forEach(function(n){
-      var t=+n.getAttribute('data-count');
-      if(reduce){ n.textContent=t+'%'; return; }
-      var s=null; function step(ts){ if(!s)s=ts; var p=Math.min((ts-s)/1400,1);
-        n.textContent=Math.round(t*(0.2+0.8*p))+'%'; if(p<1)requestAnimationFrame(step); }
-      requestAnimationFrame(step);
-    });
-  }
-  if('IntersectionObserver' in window && stats){
-    var seen=false;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  // reading progress
+  var pb=document.getElementById('progress');
+  addEventListener('scroll',function(){
+    var h=document.documentElement.scrollHeight-innerHeight;
+    pb.style.width=(scrollY/Math.max(h,1)*100)+'%';
+  },{passive:true});
+  // sticky CTA after hero
+  var sticky=document.getElementById('sticky'),hero=document.querySelector('.hero');
+  if('IntersectionObserver' in window&&hero){
     new IntersectionObserver(function(es){es.forEach(function(e){
-      if(e.isIntersecting && !seen){ seen=true; runStats(); }});},{threshold:.4}).observe(stats);
-  } else { runStats(); }
+      sticky.classList.toggle('show',!e.isIntersecting&&e.boundingClientRect.top<0);});},{threshold:0}).observe(hero);
+  }else{sticky.classList.add('show');}
+  // stat rings + count-up
+  var stats=document.getElementById('stats');
+  function run(){
+    document.querySelectorAll('.rc').forEach(function(c){var pct=+c.getAttribute('data-pct'),len=263.9;
+      if(reduce){c.style.strokeDashoffset=len*(1-pct/100);return;}
+      c.style.transition='stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1)';
+      requestAnimationFrame(function(){c.style.strokeDashoffset=len*(1-pct/100);});});
+    document.querySelectorAll('.num[data-count]').forEach(function(n){var t=+n.getAttribute('data-count');
+      if(reduce){n.textContent=t+'%';return;}var s=null;
+      function step(ts){if(!s)s=ts;var p=Math.min((ts-s)/1400,1);
+        n.textContent=Math.round(t*(.2+.8*p))+'%';if(p<1)requestAnimationFrame(step);}requestAnimationFrame(step);});
+  }
+  if('IntersectionObserver' in window&&stats){var seen=false;
+    new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!seen){seen=true;run();}});},{threshold:.4}).observe(stats);
+  }else{run();}
 })();
 </script>
 </body>
